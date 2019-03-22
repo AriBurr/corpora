@@ -14,6 +14,7 @@ export const StyledButton = styled("button", themeProps)`
   font-size: ${props => props.fontSize || ReadStyleGuide.font.size.mediumSmall};
   font-weight: ${props => props.fontWeight};
   padding: ${props => props.padding || "5px 20px"};
+  ${props => (props.margin ? `margin: ${props.margin}` : null)};
   width: ${props => props.width || "initial"};
 
   &:hover {

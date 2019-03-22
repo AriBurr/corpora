@@ -5,14 +5,30 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    primaryColor: "#6495ed"
+    flashMessage: {}
+  },
+  getters: {
+    displayMessage: state => {
+      if (state.flashMessage.message) {
+        return state.flashMessage.message;
+      }
+    }
   },
   mutations: {
-    setThemeColor(state, color) {
-      state.primaryColor = color;
+    setFlash(state, payload) {
+      state.flashMessage.message = payload.message;
+      state.flashMessage.status = payload.status;
+    },
+    removeFlash(state) {
+      state.flashMessage = {};
     }
   },
   actions: {
-    themeColor: state => state.primaryColor
+    setFlash(state, p) {
+      state.commit("setFlash", p);
+    },
+    removeFlash(state) {
+      state.flashMessage = {};
+    }
   }
 });

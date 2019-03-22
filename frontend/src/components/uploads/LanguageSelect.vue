@@ -1,6 +1,8 @@
 <template>
-  <StyledDiv margin="10px 0">
-    <StyledSubHeader>Select a language to upload:</StyledSubHeader>
+  <StyledDiv margin="30px 0">
+    <StyledSubHeader margin="0 0 20px 0"
+      >Select a language to upload:</StyledSubHeader
+    >
     <select
       v-model="selectedLanguage"
       @input="

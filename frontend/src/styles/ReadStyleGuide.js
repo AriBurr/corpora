@@ -1,8 +1,9 @@
 const ReadStyleGuide = {
   color: {
     lightBlue: "#6495ed",
-    lightGreen: "#54EBDB",
+    lightGreen: "#63eb54",
     lightOrange: "#ffc9a1",
+    lightRed: "#ed6464",
     brightYellow: "#FFE05C",
     softPurple: "#8368EE",
     white: "#f9f9f9",

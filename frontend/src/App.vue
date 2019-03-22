@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <FlashMessage />
     <div id="header-nav" class="nav-bars">
       <div class="nav-design">
         <router-link class="routerLink" to="/">Home</router-link>
@@ -19,12 +20,9 @@
 </template>
 
 <script>
+import FlashMessage from "./components/flash/FlashMessage";
 export default {
-  data() {
-    return {
-      uploadCount: 0
-    };
-  }
+  components: { FlashMessage }
 };
 </script>
 

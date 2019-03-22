@@ -38,7 +38,7 @@ export const StyledDiv = styled("div", themeProps)`
   padding: ${props => props.padding};
   right: ${props => props.right};
   top: ${props => props.top};
-  width: ${props => props.width || "initial"};
+  width: ${props => props.width || "100%"};
   z-index: ${props => props.zIndex || null};
 
   &:hover {
