@@ -1,9 +1,9 @@
 <template>
   <div class="radio-wrap">
-    <h2 class="how-will-you">How will you upload files?</h2>
+    <StyledSubHeader>How will you upload files?</StyledSubHeader>
     <div class="button-wrap">
       <div class="single-radio">
-        <h3>Copy/Paste URL</h3>
+        <StyledText>Copy/Paste URL</StyledText>
         <input
           type="radio"
           v-model="uploadType"
@@ -16,7 +16,7 @@
         />
       </div>
       <div class="single-radio">
-        <h3>Upload File(s)</h3>
+        <StyledText>Upload File(s)</StyledText>
         <input
           type="radio"
           v-model="uploadType"
@@ -33,7 +33,10 @@
 </template>
 
 <script>
+import { StyledSubHeader } from "../styled/StyledSubHeader";
+import { StyledText } from "../styled/StyledText";
 export default {
+  components: { StyledSubHeader, StyledText },
   data() {
     return {
       uploadType: null

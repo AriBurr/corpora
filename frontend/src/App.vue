@@ -2,15 +2,19 @@
   <div id="app">
     <div id="header-nav" class="nav-bars">
       <div class="nav-design">
-        <router-link to="/">Home</router-link>|
-        <router-link to="/uploads">Uploads</router-link>|
-        <router-link to="/recommender">Recommender</router-link>
+        <router-link class="routerLink" to="/">Home</router-link>
+        <router-link class="routerLink routerLinkBorder" to="/uploads"
+          >Uploads</router-link
+        >
+        <router-link class="routerLink routerLinkBorder" to="/recommender"
+          >Recommender</router-link
+        >
       </div>
     </div>
     <div class="router-wrap">
       <router-view />
     </div>
-    <div id="footer-nav" class="nav-bars">READ Toolkit</div>
+    <div id="footer-nav" class="routerLink nav-bars">READ Toolkit</div>
   </div>
 </template>
 
@@ -46,12 +50,20 @@ span {
   height: 90vh;
 }
 
+.routerLink {
+  font-weight: 500;
+}
+
+.routerLinkBorder {
+  border-left: 2px solid white;
+}
+
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  // color: #2c3e50;
 
   .nav-bars {
     background: cornflowerblue;

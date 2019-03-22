@@ -1,4 +1,5 @@
 virtualenv/
 .vscode/
 __pycache__/
-.env
+corpora/.env
+env/

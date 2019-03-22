@@ -4,8 +4,8 @@
   </StyledDiv>
 </template>
 <script>
-import { StyledDiv } from "../components/generics/StyledDiv.js";
-import { StyledHeader } from "../components/generics/StyledHeader.js";
+import { StyledDiv } from "../components/styled/StyledDiv.js";
+import { StyledHeader } from "../components/styled/StyledHeader.js";
 export default {
   name: "Recommender",
   components: { StyledDiv, StyledHeader }

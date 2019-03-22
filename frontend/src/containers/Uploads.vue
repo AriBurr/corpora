@@ -1,14 +1,11 @@
 <template>
   <div class="wrapper">
-    <h1 class="uploads-header">Corpora Upload</h1>
-    <div class="lang-select-wrap">
-      <h1 class="lang-select-header">Select a language to upload:</h1>
-      <LanguageSelect
-        v-model="selectedLanguage"
-        :languages="languages"
-        @languageSelection="languageSelection"
-      />
-    </div>
+    <StyledHeader>Corpora Upload</StyledHeader>
+    <LanguageSelect
+      v-model="selectedLanguage"
+      :languages="languages"
+      @languageSelection="languageSelection"
+    />
     <RadioButtons
       v-model="uploadType"
       :uploadTypes="uploadTypes"
@@ -34,13 +31,17 @@ import Uploader from "../components/uploads/Uploader";
 import FileUpload from "../components/uploads/FileUpload";
 import RadioButtons from "../components/uploads/RadioButtons";
 import axios from "axios";
+import { StyledHeader } from "../components/styled/StyledHeader";
+import { StyledSubHeader } from "../components/styled/StyledSubHeader";
 
 export default {
   components: {
     LanguageSelect,
     RadioButtons,
     Uploader,
-    FileUpload
+    FileUpload,
+    StyledHeader,
+    StyledSubHeader
   },
   data() {
     return {

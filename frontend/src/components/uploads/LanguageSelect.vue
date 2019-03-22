@@ -1,5 +1,6 @@
 <template>
-  <div class="input-wrap">
+  <StyledDiv margin="10px 0">
+    <StyledSubHeader>Select a language to upload:</StyledSubHeader>
     <select
       v-model="selectedLanguage"
       @input="
@@ -17,11 +18,14 @@
         >{{ option.name }}</option
       >
     </select>
-  </div>
+  </StyledDiv>
 </template>
 
 <script>
+import { StyledSubHeader } from "../styled/StyledSubHeader";
+import { StyledDiv } from "../styled/StyledDiv";
 export default {
+  components: { StyledSubHeader, StyledDiv },
   data() {
     return {
       selectedLanguage: null

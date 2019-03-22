@@ -2,11 +2,12 @@ const ReadStyleGuide = {
   color: {
     lightBlue: "#6495ed",
     lightGreen: "#54EBDB",
-    lightOrange: "#FFA1FC",
+    lightOrange: "#ffc9a1",
     brightYellow: "#FFE05C",
     softPurple: "#8368EE",
-    white: "#fbeee4",
-    darkBlue: "#2c3e50"
+    white: "#f9f9f9",
+    darkBlue: "#2c3e50",
+    boxShadow: "#b5b5b5"
   },
   font: {
     size: {

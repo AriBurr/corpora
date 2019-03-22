@@ -1,8 +1,13 @@
 <template>
   <div class="wrap">
     <div class="button-wrap">
-      <div class="add-file btn" v-on:click="addFiles()">Add Files</div>
-      <div class="file-select-wrap">
+      <StyledButton
+        :borderColor="addButton"
+        :color="styles(`text`)"
+        v-on:click="addFiles()"
+        >Add Files</StyledButton
+      >
+      <StyledDiv>
         <input
           class="inputFile"
           type="file"
@@ -11,8 +16,13 @@
           v-on:change="handleFileUpload()"
           multiple
         />
-        <button class="submit btn" v-on:click="submitFile()">Upload</button>
-      </div>
+        <StyledButton
+          v-on:click="
+            file.length > 0 && selectedLanguage !== false ? submitFile() : null
+          "
+          >Upload</StyledButton
+        >
+      </StyledDiv>
     </div>
     <div v-if="file.length > 0" class="list-wrap">
       <h3 style="padding: 0 60px">File Name</h3>
@@ -26,10 +36,16 @@
 
 <script>
 import axios from "axios";
+import { StyledButton } from "../styled/StyledButton";
+import { StyledDiv } from "../styled/StyledDiv";
+import ReadStyleGuide from "../../styles/ReadStyleGuide";
 export default {
+  components: { StyledButton, StyledDiv },
   data() {
     return {
-      file: []
+      file: [],
+      submitButton: ReadStyleGuide.color.lightGreen,
+      addButton: ReadStyleGuide.color.lightOrange
     };
   },
   props: ["selectedLanguage"],
@@ -70,6 +86,11 @@ export default {
     },
     removeFile(key) {
       this.file.splice(key, 1);
+    },
+    styles(i) {
+      if (i === "text") {
+        return `${ReadStyleGuide.color.darkBlue}`;
+      }
     }
   }
 };
@@ -105,9 +126,6 @@ export default {
   padding: 0 20px;
 }
 
-.file-select-wrap {
-  margin: 20px 0;
-}
 .submit {
   background-color: #332d8c;
 
