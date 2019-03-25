@@ -79,7 +79,7 @@
 import axios from "axios";
 
 import LanguageSelect from "../components/uploads/LanguageSelect";
-import URLUpload from "../components/uploads/UrlUpload";
+import URLUpload from "../components/uploads/URLUpload";
 import FileUpload from "../components/uploads/FileUpload";
 import RadioButton from "../components/generics/RadioButton";
 import RecentlyAdded from "../components/uploads/RecentlyAdded";

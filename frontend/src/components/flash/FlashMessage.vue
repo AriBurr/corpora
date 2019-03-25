@@ -22,10 +22,8 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import { StyledDiv } from "../styled/StyledDiv.js";
-import { StyledText } from "../styled/StyledText.js";
-import ReadStyleGuide from "../../styles/ReadStyleGuide.js";
+import { StyledDiv, StyledText, ReadStyleGuide } from "../styled";
+
 export default {
   components: { StyledDiv, StyledText },
   data() {

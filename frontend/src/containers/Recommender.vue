@@ -103,7 +103,7 @@ export default {
             letters: this.selectedLetters.join(""),
             word_length: this.selectedWordLength
           })
-          .then(r => (this.generatedRecommendations = r))
+          .then(r => console.log(r))
           .catch(r => console.log("error -> " + r));
       } else {
         alert("Please Select 4 Letters and Word Length");
