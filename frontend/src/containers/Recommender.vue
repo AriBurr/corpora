@@ -19,6 +19,7 @@
         :selectedLanguage="selectedLanguage"
         :selectedLetters="selectedLetters"
         :selectedWordLength="selectedWordLength"
+        :selectedPhoneme="selectedPhoneme"
       />
       <StyledButton @click="handleGeneration" margin="0 0 0 20px"
         >Generate</StyledButton

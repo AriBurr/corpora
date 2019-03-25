@@ -11,7 +11,7 @@
         :passedFunc="handlePhonemeSelection"
         passedName="wordLength"
         :passedTitle="single.title"
-        passedValue="single.value"
+        :passedValue="single.value"
       />
     </StyledScrollDiv>
   </StyledDiv>
