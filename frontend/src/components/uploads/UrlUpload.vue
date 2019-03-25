@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import { StyledButton } from "../styled/StyledButton.js";
-import ReadStyleGuide from "../../styles/ReadStyleGuide.js";
+import { StyledButton, ReadStyleGuide } from "../styled/index";
+
 export default {
   components: { StyledButton },
   data() {

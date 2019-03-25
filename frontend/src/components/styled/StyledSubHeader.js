@@ -3,7 +3,7 @@ import ReadStyleGuide from "../../styles/ReadStyleGuide";
 import { themeProps } from "./ThemeProps";
 import { media } from "./MediaSizes";
 
-export const StyledSubHeader = styled("h2", themeProps)`
+export const sSubHeader = styled("h2", themeProps)`
   width: ${props => props.width || "initial"};
   text-align: ${props => props.textAlign || "center"};
   margin: ${props => props.margin || "0px"};

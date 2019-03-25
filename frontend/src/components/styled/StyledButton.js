@@ -2,7 +2,7 @@ import styled from "vue-styled-components";
 import ReadStyleGuide from "../../styles/ReadStyleGuide";
 import { themeProps } from "./ThemeProps";
 
-export const StyledButton = styled("button", themeProps)`
+export const sButton = styled("button", themeProps)`
   background-color: ${props =>
     props.backgroundColor || ReadStyleGuide.color.white};
   border: ${props =>

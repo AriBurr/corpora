@@ -3,7 +3,7 @@ import { themeProps } from "./ThemeProps";
 import ReadStyleGuide from "../../styles/ReadStyleGuide";
 import { media } from "./MediaSizes";
 
-export const StyledHeader = styled("h1", themeProps)`
+export const sHeader = styled("h1", themeProps)`
   width: ${props => props.width || "initial"};
   text-align: ${props => props.textAlign || "center"};
   color: ${props => props.color || ReadStyleGuide.color.darkBlue};

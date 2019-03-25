@@ -1,8 +1,6 @@
 <template>
-  <StyledDiv margin="30px 0">
-    <StyledSubHeader margin="0 0 20px 0"
-      >Select a language to upload:</StyledSubHeader
-    >
+  <StyledDiv :flexDirection="flexDirection ? 'row' : 'column'">
+    <StyledSubHeader>{{ passedTitle }}</StyledSubHeader>
     <select
       v-model="selectedLanguage"
       @input="
@@ -24,8 +22,8 @@
 </template>
 
 <script>
-import { StyledSubHeader } from "../styled/StyledSubHeader";
-import { StyledDiv } from "../styled/StyledDiv";
+import { StyledSubHeader, StyledDiv } from "../styled/index";
+
 export default {
   components: { StyledSubHeader, StyledDiv },
   data() {
@@ -34,6 +32,14 @@ export default {
     };
   },
   props: {
+    flexDirection: {
+      type: String,
+      required: false
+    },
+    passedTitle: {
+      type: String,
+      required: false
+    },
     value: null,
     languages: {
       type: Array,

@@ -3,7 +3,7 @@ import { themeProps } from "./ThemeProps";
 import ReadStyleGuide from "../../styles/ReadStyleGuide";
 import { media } from "./MediaSizes";
 
-export const StyledText = styled("p", themeProps)`
+export const sText = styled("p", themeProps)`
   color: ${props => props.color || ReadStyleGuide.color.darkBlue};
   font-style: ${props => props.fontStyle || "initial"};
   font-family: ${props => props.fontFamily || ReadStyleGuide.font.family.chivo};

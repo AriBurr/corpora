@@ -2,7 +2,7 @@ import styled from "vue-styled-components";
 import themeProps from "./ThemeProps";
 import { media } from "./MediaSizes";
 
-export const StyledImage = styled("img", themeProps)`
+export const sImage = styled("img", themeProps)`
 max-width: ${props => props.maxWidth};
 max-height: ${props => props.maxHeight};
 min-width: ${props => props.minWidth || null};

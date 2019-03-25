@@ -21,11 +21,13 @@
 </template>
 
 <script>
-import { StyledDiv } from "../styled/StyledDiv";
-import { StyledText } from "../styled/StyledText";
+import {
+  StyledDiv,
+  StyledText,
+  StyledHeader,
+  ReadStyleGuide
+} from "../styled/index";
 
-import { StyledHeader } from "../styled/StyledHeader.js";
-import ReadStyleGuide from "../../styles/ReadStyleGuide";
 export default {
   components: { StyledDiv, StyledText, StyledHeader },
   props: ["recentlyAdded", "removeUploadedFile"],

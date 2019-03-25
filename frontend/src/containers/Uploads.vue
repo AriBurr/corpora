@@ -6,6 +6,7 @@
         v-model="selectedLanguage"
         :languages="languages"
         @languageSelection="languageSelection"
+        passedTitle="Select a Language to upload:"
       />
       <StyledDiv>
         <StyledSubHeader>How will you upload files?</StyledSubHeader>
@@ -83,11 +84,13 @@ import FileUpload from "../components/uploads/FileUpload";
 import RadioButton from "../components/generics/RadioButton";
 import RecentlyAdded from "../components/uploads/RecentlyAdded";
 import ListFileUploads from "../components/uploads/ListFileUpload";
-import { StyledHeader } from "../components/styled/StyledHeader";
-import { StyledSubHeader } from "../components/styled/StyledSubHeader";
-import { StyledDiv } from "../components/styled/StyledDiv.js";
-import { StyledButton } from "../components/styled/StyledButton.js";
-import ReadStyleGuide from "../styles/ReadStyleGuide";
+import {
+  StyledHeader,
+  StyledSubHeader,
+  StyledDiv,
+  StyledButton,
+  ReadStyleGuide
+} from "../components/styled/index";
 
 export default {
   components: {

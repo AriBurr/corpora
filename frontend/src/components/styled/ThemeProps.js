@@ -29,6 +29,7 @@ export const themeProps = {
   fontWeight: String,
   fontStyle: String,
   height: String,
+  hoverBrightness: String,
   justifyContent: String,
   left: String,
   margin: String,

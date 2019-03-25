@@ -1,8 +1,8 @@
 <template>
-  <StyledDiv :width="passedWidth">
+  <StyledDiv flexDirection="row" margin="5px 0">
     <StyledText>{{ passedTitle }}</StyledText>
     <input
-      type="radio"
+      type="checkbox"
       name="passedName"
       v-model="uploadType"
       :value="passedValue"
@@ -24,8 +24,7 @@ export default {
     passedValue: { type: String, required: true },
     passedTitle: { type: String, required: true },
     passedName: { type: String, required: true },
-    passedFunc: { type: Function, required: true },
-    passedWidth: { type: String, required: false }
+    passedFunc: { type: Function, required: true }
   },
   methods: {
     styled(e) {

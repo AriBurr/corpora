@@ -26,10 +26,13 @@
 </template>
 
 <script>
-import { StyledDiv } from "../styled/StyledDiv";
-import { StyledText } from "../styled/StyledText";
-import { StyledButton } from "../styled/StyledButton.js";
-import ReadStyleGuide from "../../styles/ReadStyleGuide";
+import {
+  StyledDiv,
+  StyledText,
+  StyledButton,
+  ReadStyleGuide
+} from "../styled/index.js";
+
 export default {
   components: { StyledDiv, StyledText, StyledButton },
   props: ["filesToUpload", "removeUploadedFile"],

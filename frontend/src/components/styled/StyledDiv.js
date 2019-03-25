@@ -2,7 +2,7 @@ import styled from "vue-styled-components";
 // import ReadStyleGuide from "../../styles/ReadStyleGuide";
 import { themeProps } from "./ThemeProps";
 
-export const StyledDiv = styled("div", themeProps)`
+export const sDiv = styled("div", themeProps)`
   align-items: ${props => props.alignItems || "center"};
   align-self: ${props => props.alignSelf || null};
   background-color: ${props => props.backgroundColor || null};

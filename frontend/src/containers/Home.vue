@@ -5,13 +5,11 @@
 </template>
 
 <script>
-import { StyledButton } from "../components/styled/StyledButton.js";
-import { StyledDiv } from "../components/styled/StyledDiv.js";
-import { StyledHeader } from "../components/styled/StyledHeader.js";
+import { StyledDiv, StyledHeader } from "../components/styled/index";
 
 export default {
   name: "home",
-  components: { StyledButton, StyledDiv, StyledHeader }
+  components: { StyledDiv, StyledHeader }
 };
 </script>
 
