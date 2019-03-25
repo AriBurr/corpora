@@ -16,6 +16,7 @@ export const sButton = styled("button", themeProps)`
   padding: ${props => props.padding || "5px 20px"};
   ${props => (props.margin ? `margin: ${props.margin}` : null)};
   width: ${props => props.width || "initial"};
+  ${props => (props.height ? `height: ${props.height}` : "initial")};
 
   &:hover {
     cursor: ${props => props.cursor || "pointer"};

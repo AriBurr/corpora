@@ -37,7 +37,7 @@ export default {
     });
   },
   watch: {
-    messageToDisplay: function(nV) {
+    messageToDisplay: function() {
       setTimeout(() => {
         this.$store.commit("removeFlash");
       }, 3000);

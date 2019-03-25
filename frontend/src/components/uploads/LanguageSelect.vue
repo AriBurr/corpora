@@ -2,6 +2,7 @@
   <StyledDiv :flexDirection="flexDirection ? 'row' : 'column'">
     <StyledSubHeader>{{ passedTitle }}</StyledSubHeader>
     <select
+      style="line-height: 1.5; padding: 0 5px"
       v-model="selectedLanguage"
       @input="
         event => {

@@ -20,17 +20,23 @@
       <StyledDiv width="50%" height="100%" justifyContent="center">
         <StyledText :fontWeight="styled(`fw`)">Letters:</StyledText>
         <StyledDiv flexDirection="row">
-          <StyledText v-for="single in selectedLetters" :key="single">
-            {{ single }}{{ selectedLetters.length > 1 ? `, ` : null }}
-          </StyledText>
+          <StyledText v-for="(single, i) in selectedLetters" :key="single"
+            >{{ single
+            }}{{
+              selectedLetters.length > 1 && i !== selectedLetters.length - 1
+                ? `, `
+                : null
+            }}</StyledText
+          >
         </StyledDiv>
       </StyledDiv>
       <StyledDiv height="100%">
         <StyledText :fontWeight="styled(`fw`)">Phoneme:</StyledText>
         <StyledDiv flexDirection="row">
-          <StyledText v-for="single in selectedPhoneme" :key="single">
-            {{ single }}{{ selectedPhoneme.length > 1 ? `, ` : null }}
-          </StyledText>
+          <StyledText v-for="single in selectedPhoneme" :key="single"
+            >{{ single
+            }}{{ selectedPhoneme.length > 1 ? `, ` : null }}</StyledText
+          >
         </StyledDiv>
       </StyledDiv>
     </StyledDiv>

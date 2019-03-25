@@ -13,7 +13,11 @@
       @languageSelection="languageSelection"
       passedTitle="Select a Language:"
     />
-    <StyledDiv v-if="selectedLanguage !== false" flexDirection="row">
+    <StyledDiv
+      v-if="selectedLanguage !== false"
+      flexDirection="row"
+      height="100px"
+    >
       <UserSelections
         v-if="selectedLanguage !== false"
         :selectedLanguage="selectedLanguage"
@@ -21,7 +25,7 @@
         :selectedWordLength="selectedWordLength"
         :selectedPhoneme="selectedPhoneme"
       />
-      <StyledButton @click="handleGeneration" margin="0 0 0 20px"
+      <StyledButton @click="handleGeneration" margin="0 0 0 20px" height="100%"
         >Generate</StyledButton
       >
     </StyledDiv>
@@ -97,16 +101,29 @@ export default {
   },
   methods: {
     handleGeneration() {
+      console.log("handle genertation");
       if (this.selectedLetters.length >= 4 && this.selectedWordLength !== 0) {
         axios
           .post("/generate_recommendations/", {
             letters: this.selectedLetters.join(""),
             word_length: this.selectedWordLength
           })
-          .then(r => console.log(r))
+          .then(r => {
+            console.log("fart");
+            console.log(r);
+            this.updateRecommendations(r.data);
+          })
           .catch(r => console.log("error -> " + r));
       } else {
         alert("Please Select 4 Letters and Word Length");
+      }
+    },
+    updateRecommendations(r) {
+      console.log("ding dong");
+      console.log(r);
+      for (let s of r) {
+        console.log(s);
+        this.generatedRecommendations.push(s);
       }
     },
     listPhonemes() {
