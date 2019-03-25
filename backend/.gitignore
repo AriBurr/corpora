@@ -3,5 +3,4 @@ virtualenv/
 .vscode/
 __pycache__/
 corpora/.env
-env/
 secrets.sh
