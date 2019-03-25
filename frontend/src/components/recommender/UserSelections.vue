@@ -1,6 +1,6 @@
 <template>
   <StyledDiv
-    width="50%"
+    width="65%"
     margin="10px 0"
     :border="styled(`border`)"
     borderRadius="10px"
@@ -20,14 +20,14 @@
       <StyledDiv width="50%" height="100%" justifyContent="center">
         <StyledText :fontWeight="styled(`fw`)">Letters:</StyledText>
         <StyledDiv flexDirection="row">
-          <StyledText v-for="(single, i) in selectedLetters" :key="single"
-            >{{ single
+          <StyledText v-for="(single, i) in selectedLetters" :key="single">
+            {{ single
             }}{{
               selectedLetters.length > 1 && i !== selectedLetters.length - 1
                 ? `, `
                 : null
-            }}</StyledText
-          >
+            }}
+          </StyledText>
         </StyledDiv>
       </StyledDiv>
       <StyledDiv height="100%">

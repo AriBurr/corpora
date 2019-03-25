@@ -6,47 +6,59 @@
     height="100%"
   >
     <StyledHeader width="100%">Recommender System</StyledHeader>
-    <LanguageSelect
-      flexDirection="true"
-      v-model="selectedLanguage"
-      :languages="languages"
-      @languageSelection="languageSelection"
-      passedTitle="Select a Language:"
-    />
     <StyledDiv
-      v-if="selectedLanguage !== false"
-      flexDirection="row"
-      height="100px"
-    >
-      <UserSelections
-        v-if="selectedLanguage !== false"
-        :selectedLanguage="selectedLanguage"
-        :selectedLetters="selectedLetters"
-        :selectedWordLength="selectedWordLength"
-        :selectedPhoneme="selectedPhoneme"
-      />
-      <StyledButton @click="handleGeneration" margin="0 0 0 20px" height="100%"
-        >Generate</StyledButton
-      >
-    </StyledDiv>
-    <StyledDiv
-      v-if="selectedLanguage !== false"
       flexDirection="row"
       justifyContent="flex-start"
       alignItems="flex-start"
     >
       <StyledDiv width="20%">
-        <WordLengthSelection
-          :handleWordLength="handleWordLength"
-          :selectedWordLength="selectedWordLength"
+        <LanguageSelect
+          recommender="true"
+          v-model="selectedLanguage"
+          :languages="languages"
+          @languageSelection="languageSelection"
+          passedTitle="Select a Language:"
         />
-        <PhonemeSelection
-          :handlePhonemeSelection="handlePhonemeSelection"
-          :selectedPhoneme="selectedPhoneme"
-          :phonemeList="phonemeList"
+        <StyledDiv v-if="selectedLanguage !== false">
+          <WordLengthSelection
+            :handleWordLength="handleWordLength"
+            :selectedWordLength="selectedWordLength"
+          />
+          <PhonemeSelection
+            :handlePhonemeSelection="handlePhonemeSelection"
+            :selectedPhoneme="selectedPhoneme"
+            :phonemeList="phonemeList"
+          />
+        </StyledDiv>
+      </StyledDiv>
+      <StyledDiv justifyContent="flex-start" alignItems="flex-start">
+        <StyledDiv
+          v-if="selectedLanguage !== false"
+          flexDirection="row"
+          justifyContent="space-around"
+          height="100px"
+        >
+          <UserSelections
+            v-if="selectedLanguage !== false"
+            :selectedLanguage="selectedLanguage"
+            :selectedLetters="selectedLetters"
+            :selectedWordLength="selectedWordLength"
+            :selectedPhoneme="selectedPhoneme"
+          />
+          <StyledButton @click="handleGeneration" width="20%" height="100%"
+            >Generate</StyledButton
+          >
+        </StyledDiv>
+
+        <DisplayRecommendations
+          v-if="generatedRecommendations.length"
+          :generatedRecommendations="generatedRecommendations"
         />
       </StyledDiv>
+    </StyledDiv>
+    <StyledDiv height="20%">
       <AlphabetSelection
+        v-if="selectedLanguage !== false"
         :handleLetterSelection="handleLetterSelection"
         :selectedLetters="selectedLetters"
         :letters="letterListFromLanguage"
@@ -62,6 +74,7 @@ import AlphabetList from "../helpers/AlphabetList";
 
 import UserSelections from "../components/recommender/UserSelections";
 import LanguageSelect from "../components/uploads/LanguageSelect";
+import DisplayRecommendations from "../components/recommender/DisplayRecommendations";
 import WordLengthSelection from "../components/recommender/WordLengthSelection";
 import PhonemeSelection from "../components/recommender/PhonemeSelection";
 import AlphabetSelection from "../components/recommender/AlphabetSelection";
@@ -79,6 +92,7 @@ export default {
     StyledHeader,
     StyledButton,
     UserSelections,
+    DisplayRecommendations,
     WordLengthSelection,
     PhonemeSelection,
     LanguageSelect,

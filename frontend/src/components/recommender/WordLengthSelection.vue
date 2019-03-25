@@ -1,12 +1,13 @@
 <template>
   <StyledDiv
     :border="styled(`border`)"
-    :fontSize="styled(`subHeaderFS`)"
     padding="10px 0"
     margin="5px 0"
     justifyContent="space-around"
   >
-    <StyledSubHeader>Word Length</StyledSubHeader>
+    <StyledSubHeader :fontSize="styled(`subHeaderFS`)"
+      >Word Length</StyledSubHeader
+    >
     <StyledDiv
       class="radioBoxes"
       flexDirection="row"

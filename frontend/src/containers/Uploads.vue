@@ -9,7 +9,9 @@
         passedTitle="Select a Language to upload:"
       />
       <StyledDiv>
-        <StyledSubHeader>How will you upload files?</StyledSubHeader>
+        <StyledSubHeader :fontSize="styled(`subHeaderFS`)"
+          >How will you upload files?</StyledSubHeader
+        >
         <StyledDiv flexDirection="row" width="50%" margin="20px 0">
           <RadioButton
             v-model="uploadType"
@@ -208,6 +210,8 @@ export default {
         return "50%";
       } else if (e === "bg") {
         return ReadStyleGuide.color.darkBlue;
+      } else if (e === "subHeaderFS") {
+        return ReadStyleGuide.font.size.mediumSmall;
       }
     }
   }

@@ -1,6 +1,12 @@
 <template>
-  <StyledDiv :flexDirection="flexDirection ? 'row' : 'column'">
-    <StyledSubHeader>{{ passedTitle }}</StyledSubHeader>
+  <StyledDiv
+    :border="recommender ? styled(`border`) : null"
+    :padding="recommender ? '10px 0' : null"
+    margin="recommender?5px 0:null"
+  >
+    <StyledSubHeader :fontSize="styled(`subHeaderFS`)">{{
+      passedTitle
+    }}</StyledSubHeader>
     <select
       style="line-height: 1.5; padding: 0 5px"
       v-model="selectedLanguage"
@@ -23,7 +29,7 @@
 </template>
 
 <script>
-import { StyledSubHeader, StyledDiv } from "../styled/index";
+import { StyledSubHeader, StyledDiv, ReadStyleGuide } from "../styled/index";
 
 export default {
   components: { StyledSubHeader, StyledDiv },
@@ -33,8 +39,8 @@ export default {
     };
   },
   props: {
-    flexDirection: {
-      type: String,
+    recommender: {
+      type: Boolean,
       required: false
     },
     passedTitle: {
@@ -49,6 +55,15 @@ export default {
   },
   mounted() {
     this.selectedLanguage = this.value;
+  },
+  methods: {
+    styled(e) {
+      if (e === "border") {
+        return `5px solid ${ReadStyleGuide.color.lightGray}`;
+      } else if (e === "subHeaderFS") {
+        return ReadStyleGuide.font.size.mediumSmall;
+      }
+    }
   },
   watch: {
     value: function(newValue) {

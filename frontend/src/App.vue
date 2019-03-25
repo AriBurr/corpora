@@ -3,11 +3,11 @@
     <FlashMessage />
     <div id="header-nav" class="nav-bars">
       <div class="nav-design">
-        <router-link class="routerLink" to="/">Home</router-link>
-        <router-link class="routerLink routerLinkBorder" to="/uploads"
+        <router-link to="/home">Home</router-link>
+        <router-link class="routerLinkBorder" to="/uploads"
           >Uploads</router-link
         >
-        <router-link class="routerLink routerLinkBorder" to="/recommender"
+        <router-link class="routerLinkBorder" to="/recommender"
           >Recommender</router-link
         >
       </div>
@@ -50,6 +50,13 @@ span {
 
 .routerLink {
   font-weight: 500;
+  background: cornflowerblue;
+  color: white;
+}
+
+.router-link-active {
+  background: white !important;
+  color: cornflowerblue !important;
 }
 
 .routerLinkBorder {
@@ -64,14 +71,12 @@ span {
   // color: #2c3e50;
 
   .nav-bars {
-    background: cornflowerblue;
     display: flex;
     position: fixed;
     height: 5vh;
     align-items: center;
     justify-content: center;
     width: 100%;
-    color: white;
 
     .nav-design {
       width: 40%;
@@ -98,6 +103,7 @@ span {
   }
 
   #header-nav {
+    background-color: cornflowerblue;
     top: 0;
     left: 0;
   }
