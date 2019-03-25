@@ -13,12 +13,17 @@
       @languageSelection="languageSelection"
       passedTitle="Select a Language:"
     />
-    <UserSelections
-      v-if="selectedLanguage !== false"
-      :selectedLanguage="selectedLanguage"
-      :selectedLetters="selectedLetters"
-      :selectedWordLength="selectedWordLength"
-    />
+    <StyledDiv v-if="selectedLanguage !== false" flexDirection="row">
+      <UserSelections
+        v-if="selectedLanguage !== false"
+        :selectedLanguage="selectedLanguage"
+        :selectedLetters="selectedLetters"
+        :selectedWordLength="selectedWordLength"
+      />
+      <StyledButton @click="handleGeneration" margin="0 0 0 20px"
+        >Generate</StyledButton
+      >
+    </StyledDiv>
     <StyledDiv
       v-if="selectedLanguage !== false"
       flexDirection="row"
@@ -56,13 +61,18 @@ import WordLengthSelection from "../components/recommender/WordLengthSelection";
 import PhonemeSelection from "../components/recommender/PhonemeSelection";
 import AlphabetSelection from "../components/recommender/AlphabetSelection";
 
-import { StyledDiv, StyledHeader } from "../components/styled/index.js";
+import {
+  StyledDiv,
+  StyledButton,
+  StyledHeader
+} from "../components/styled/index.js";
 
 export default {
   name: "Recommender",
   components: {
     StyledDiv,
     StyledHeader,
+    StyledButton,
     UserSelections,
     WordLengthSelection,
     PhonemeSelection,
@@ -77,13 +87,27 @@ export default {
       selectedLetters: [],
       languages: [],
       phonemeList: [],
-      letterListFromLanguage: []
+      letterListFromLanguage: [],
+      generatedRecommendations: []
     };
   },
   mounted() {
     axios.get("/languages").then(r => (this.languages = r.data));
   },
   methods: {
+    handleGeneration() {
+      if (this.selectedLetters.length >= 4 && this.selectedWordLength !== 0) {
+        axios
+          .post("/generate_recommendations/", {
+            letters: this.selectedLetters.join(""),
+            word_length: this.selectedWordLength
+          })
+          .then(r => (this.generatedRecommendations = r))
+          .catch(r => console.log("error -> " + r));
+      } else {
+        alert("Please Select 4 Letters and Word Length");
+      }
+    },
     listPhonemes() {
       switch (this.selectedLanguage) {
         case "1":
