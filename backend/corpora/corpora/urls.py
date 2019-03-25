@@ -7,3 +7,5 @@ urlpatterns = [
     path('', include('apps.uploads.urls')),
     path('', include('apps.recommenders.urls')),
 ]
+
+urlpatterns += [path('silk/', include('silk.urls', namespace='silk'))]

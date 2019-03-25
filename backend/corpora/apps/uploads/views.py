@@ -24,6 +24,7 @@ class UploadFileView(APIView):
             FileUploadService.parse_file_type(request.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
+            FileUploadService.remove_media_file()
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class UploadURLView(APIView):
