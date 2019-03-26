@@ -2,6 +2,7 @@
   <StyledDiv
     width="65%"
     margin="10px 0"
+    height="100%"
     :border="styled(`border`)"
     borderRadius="10px"
   >
@@ -33,10 +34,9 @@
       <StyledDiv height="100%">
         <StyledText :fontWeight="styled(`fw`)">Phoneme:</StyledText>
         <StyledDiv flexDirection="row">
-          <StyledText v-for="single in selectedPhoneme" :key="single"
-            >{{ single
-            }}{{ selectedPhoneme.length > 1 ? `, ` : null }}</StyledText
-          >
+          <StyledText v-for="single in selectedPhoneme" :key="single">
+            {{ single }}{{ selectedPhoneme.length > 1 ? `, ` : null }}
+          </StyledText>
         </StyledDiv>
       </StyledDiv>
     </StyledDiv>

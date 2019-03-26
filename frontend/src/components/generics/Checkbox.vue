@@ -1,5 +1,10 @@
 <template>
-  <StyledDiv flexDirection="row" margin="5px 0">
+  <StyledDiv
+    flexDirection="row"
+    :margin="recommender ? null : '5px 0'"
+    :height="recommender ? '30px' : null"
+    :width="recommender ? '50%' : null"
+  >
     <StyledText>{{ passedTitle }}</StyledText>
     <input
       type="checkbox"
@@ -21,6 +26,7 @@ export default {
     };
   },
   props: {
+    recommender: { type: String, required: false },
     passedValue: { type: String, required: true },
     passedTitle: { type: String, required: true },
     passedName: { type: String, required: true },

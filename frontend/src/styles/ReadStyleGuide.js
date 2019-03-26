@@ -1,7 +1,7 @@
 const GenericStyleGuide = {
   color: {
     lightBlue: "#6495ed",
-    lightGreen: "#63eb54",
+    lightGreen: "#62a25b",
     lightOrange: "#ffc9a1",
     lightRed: "#ed6464",
     lightGray: "#c6c8c7",

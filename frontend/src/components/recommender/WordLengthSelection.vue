@@ -4,6 +4,7 @@
     padding="10px 0"
     margin="5px 0"
     justifyContent="space-around"
+    borderRadius="10px"
   >
     <StyledSubHeader :fontSize="styled(`subHeaderFS`)"
       >Word Length</StyledSubHeader
@@ -90,7 +91,7 @@ export default {
   methods: {
     styled(e) {
       if (e === "border") {
-        return `5px solid ${ReadStyleGuide.color.lightGray}`;
+        return `2px solid ${ReadStyleGuide.color.darkBlue}`;
       } else if (e === "subHeaderFS") {
         return ReadStyleGuide.font.size.mediumSmall;
       }

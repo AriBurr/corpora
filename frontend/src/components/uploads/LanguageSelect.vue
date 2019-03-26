@@ -1,8 +1,10 @@
 <template>
   <StyledDiv
     :border="recommender ? styled(`border`) : null"
-    :padding="recommender ? '10px 0' : null"
-    margin="recommender?5px 0:null"
+    :borderRadius="recommender ? '10px' : null"
+    :margin="recommender ? '5px' : null"
+    :width="recommender ? '20%' : null"
+    :height="recommender ? '100%' : null"
   >
     <StyledSubHeader :fontSize="styled(`subHeaderFS`)">{{
       passedTitle
@@ -59,7 +61,7 @@ export default {
   methods: {
     styled(e) {
       if (e === "border") {
-        return `5px solid ${ReadStyleGuide.color.lightGray}`;
+        return `2px solid ${ReadStyleGuide.color.lightBlue}`;
       } else if (e === "subHeaderFS") {
         return ReadStyleGuide.font.size.mediumSmall;
       }

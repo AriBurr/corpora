@@ -1,5 +1,5 @@
 <template>
-  <StyledDiv>
+  <StyledDiv margin="5px 0" height="25%" :backgroundColor="styled(`wrapperBG`)">
     <StyledSubHeader :fontSize="styled(`subHeaderFS`)"
       >Alphabet Letter Selection</StyledSubHeader
     >
@@ -10,14 +10,16 @@
         :key="letter.id"
         width="50px"
         height="50px"
-        border="1px solid black"
+        margin="1px"
+        borderRadius="5px"
+        :border="styled(`border`)"
         :backgroundColor="styled(`bg`, letter)"
         hoverBrightness="brightness(90%)"
         cursor="pointer"
       >
-        <StyledText lineHeight="0" :fontWeight="styled(`titleWeight`)">{{
-          letter.title
-        }}</StyledText>
+        <StyledText lineHeight="0" :fontWeight="styled(`titleWeight`)">
+          {{ letter.title }}
+        </StyledText>
       </StyledDiv>
     </StyledDiv>
   </StyledDiv>
@@ -41,6 +43,10 @@ export default {
         return ReadStyleGuide.font.size.mediumSmall;
       } else if (e === "titleWeight") {
         return ReadStyleGuide.font.weight.sevenHundred;
+      } else if (e === "border") {
+        return `1px solid ${ReadStyleGuide.color.lightGray}`;
+      } else if (e === "wrapperBG") {
+        return ReadStyleGuide.color.lightGray;
       }
     }
   }

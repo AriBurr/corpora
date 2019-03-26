@@ -1,69 +1,71 @@
 <template>
   <StyledDiv
-    justifyContent="flex-start"
+    :justifyContent="selectedLanguage ? 'space-around' : 'flex-start'"
     alignItems="flex-start"
-    margin="0 20px"
     height="100%"
   >
-    <StyledHeader width="100%">Recommender System</StyledHeader>
+    <StyledDiv height="10%">
+      <StyledHeader width="100%" height="5%">Recommender System</StyledHeader>
+    </StyledDiv>
+    <StyledDiv flexDirection="row" justifyContent="space-around" height="12%">
+      <LanguageSelect
+        recommender="true"
+        v-model="selectedLanguage"
+        :languages="languages"
+        @languageSelection="languageSelection"
+        passedTitle="Select a Language:"
+      />
+      <UserSelections
+        :selectedLanguage="selectedLanguage"
+        :selectedLetters="selectedLetters"
+        :selectedWordLength="selectedWordLength"
+        :selectedPhoneme="selectedPhoneme"
+      />
+      <StyledButton
+        :color="styled(`buttonColor`)"
+        :backgroundColor="styled(`buttonBG`)"
+        :borderColor="styled(`buttonBG`)"
+        @click="handleGeneration"
+        width="20%"
+        height="100%"
+        margin="5px"
+        >Generate Recommendations</StyledButton
+      >
+    </StyledDiv>
     <StyledDiv
       flexDirection="row"
       justifyContent="flex-start"
       alignItems="flex-start"
+      height="58%"
     >
-      <StyledDiv width="20%">
-        <LanguageSelect
-          recommender="true"
-          v-model="selectedLanguage"
-          :languages="languages"
-          @languageSelection="languageSelection"
-          passedTitle="Select a Language:"
+      <StyledDiv v-if="selectedLanguage !== false" width="20%" margin="0 5px">
+        <WordLengthSelection
+          :handleWordLength="handleWordLength"
+          :selectedWordLength="selectedWordLength"
         />
-        <StyledDiv v-if="selectedLanguage !== false">
-          <WordLengthSelection
-            :handleWordLength="handleWordLength"
-            :selectedWordLength="selectedWordLength"
-          />
-          <PhonemeSelection
-            :handlePhonemeSelection="handlePhonemeSelection"
-            :selectedPhoneme="selectedPhoneme"
-            :phonemeList="phonemeList"
-          />
-        </StyledDiv>
+        <PhonemeSelection
+          :handlePhonemeSelection="handlePhonemeSelection"
+          :selectedPhoneme="selectedPhoneme"
+          :phonemeList="phonemeList"
+        />
       </StyledDiv>
-      <StyledDiv justifyContent="flex-start" alignItems="flex-start">
-        <StyledDiv
-          v-if="selectedLanguage !== false"
-          flexDirection="row"
-          justifyContent="space-around"
-          height="100px"
-        >
-          <UserSelections
-            v-if="selectedLanguage !== false"
-            :selectedLanguage="selectedLanguage"
-            :selectedLetters="selectedLetters"
-            :selectedWordLength="selectedWordLength"
-            :selectedPhoneme="selectedPhoneme"
-          />
-          <StyledButton @click="handleGeneration" width="20%" height="100%"
-            >Generate</StyledButton
-          >
-        </StyledDiv>
-
+      <StyledDiv
+        justifyContent="flex-start"
+        alignItems="flex-start"
+        height="100%"
+      >
         <DisplayRecommendations
           v-if="generatedRecommendations.length"
           :generatedRecommendations="generatedRecommendations"
         />
       </StyledDiv>
     </StyledDiv>
-    <StyledDiv height="20%">
-      <AlphabetSelection
-        v-if="selectedLanguage !== false"
-        :handleLetterSelection="handleLetterSelection"
-        :selectedLetters="selectedLetters"
-        :letters="letterListFromLanguage"
-      />
-    </StyledDiv>
+    <AlphabetSelection
+      v-if="selectedLanguage !== false"
+      :handleLetterSelection="handleLetterSelection"
+      :selectedLetters="selectedLetters"
+      :letters="letterListFromLanguage"
+    />
   </StyledDiv>
 </template>
 <script>
@@ -82,7 +84,8 @@ import AlphabetSelection from "../components/recommender/AlphabetSelection";
 import {
   StyledDiv,
   StyledButton,
-  StyledHeader
+  StyledHeader,
+  ReadStyleGuide
 } from "../components/styled/index.js";
 
 export default {
@@ -100,7 +103,7 @@ export default {
   },
   data() {
     return {
-      selectedWordLength: 0,
+      selectedWordLength: null,
       selectedLanguage: false,
       selectedPhoneme: [],
       selectedLetters: [],
@@ -174,6 +177,13 @@ export default {
         this.selectedLetters = update;
       } else {
         this.selectedLetters.push(e);
+      }
+    },
+    styled(e) {
+      if (e === "buttonColor") {
+        return ReadStyleGuide.color.white;
+      } else if (e === "buttonBG") {
+        return ReadStyleGuide.color.lightGreen;
       }
     }
   },

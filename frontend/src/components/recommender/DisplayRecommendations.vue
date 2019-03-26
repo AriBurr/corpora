@@ -1,5 +1,11 @@
 <template>
-  <StyledDiv :border="styled(`border`)" width="50%" margin="10px">
+  <StyledDiv
+    :border="styled(`border`)"
+    width="50%"
+    margin="5px"
+    borderRadius="10px"
+    overflow="hidden"
+  >
     <StyledSubHeader :fontSize="styled(`subHeaderFS`)"
       >Recommendations</StyledSubHeader
     >
@@ -28,7 +34,7 @@ export default {
   methods: {
     styled(e) {
       if (e === "border") {
-        return `5px solid ${ReadStyleGuide.color.lightGray}`;
+        return `2px solid ${ReadStyleGuide.color.brightYellow}`;
       } else if (e === "bg") {
         return ReadStyleGuide.color.white;
       } else if (e === "subHeaderFS") {

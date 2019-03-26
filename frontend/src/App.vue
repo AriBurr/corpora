@@ -3,11 +3,11 @@
     <FlashMessage />
     <div id="header-nav" class="nav-bars">
       <div class="nav-design">
-        <router-link to="/home">Home</router-link>
-        <router-link class="routerLinkBorder" to="/uploads"
+        <router-link class="routerLink" to="/home">Home</router-link>
+        <router-link class="routerLink routerLinkBorder" to="/uploads"
           >Uploads</router-link
         >
-        <router-link class="routerLinkBorder" to="/recommender"
+        <router-link class="routerLink routerLinkBorder" to="/recommender"
           >Recommender</router-link
         >
       </div>
@@ -49,7 +49,7 @@ span {
 }
 
 .routerLink {
-  font-weight: 500;
+  font-weight: 700;
   background: cornflowerblue;
   color: white;
 }
