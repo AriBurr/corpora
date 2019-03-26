@@ -17,9 +17,12 @@
         hoverBrightness="brightness(90%)"
         cursor="pointer"
       >
-        <StyledText lineHeight="0" :fontWeight="styled(`titleWeight`)">
-          {{ letter.title }}
-        </StyledText>
+        <StyledText
+          lineHeight="0"
+          :fontWeight="styled(`titleWeight`)"
+          :color="styled(`textC`, letter)"
+          >{{ letter.title }}</StyledText
+        >
       </StyledDiv>
     </StyledDiv>
   </StyledDiv>
@@ -47,6 +50,12 @@ export default {
         return `1px solid ${ReadStyleGuide.color.lightGray}`;
       } else if (e === "wrapperBG") {
         return ReadStyleGuide.color.lightGray;
+      } else if (e === "textC") {
+        if (this.selectedLetters.includes(l.title)) {
+          return ReadStyleGuide.color.SOSBlue;
+        } else {
+          return ReadStyleGuide.color.SOSBlue;
+        }
       }
     }
   }

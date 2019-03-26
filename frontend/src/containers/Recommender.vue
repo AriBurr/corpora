@@ -53,6 +53,7 @@
         justifyContent="flex-start"
         alignItems="flex-start"
         height="100%"
+        width="80%"
       >
         <DisplayRecommendations
           v-if="generatedRecommendations.length"

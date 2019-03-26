@@ -2,7 +2,7 @@
   <StyledDiv
     :border="styled(`border`)"
     width="50%"
-    margin="5px"
+    margin="5px 1px"
     borderRadius="10px"
     overflow="hidden"
   >

@@ -1,6 +1,6 @@
 <template>
   <StyledDiv
-    width="65%"
+    width="60%"
     margin="10px 0"
     height="100%"
     :border="styled(`border`)"
@@ -34,8 +34,13 @@
       <StyledDiv height="100%">
         <StyledText :fontWeight="styled(`fw`)">Phoneme:</StyledText>
         <StyledDiv flexDirection="row">
-          <StyledText v-for="single in selectedPhoneme" :key="single">
-            {{ single }}{{ selectedPhoneme.length > 1 ? `, ` : null }}
+          <StyledText v-for="(single, i) in selectedPhoneme" :key="single">
+            {{ single
+            }}{{
+              selectedPhoneme.length > 1 && i !== selectedPhoneme.length - 1
+                ? `, `
+                : null
+            }}
           </StyledText>
         </StyledDiv>
       </StyledDiv>

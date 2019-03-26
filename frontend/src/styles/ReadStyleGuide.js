@@ -7,6 +7,7 @@ const GenericStyleGuide = {
     lightGray: "#c6c8c7",
     brightYellow: "#FFE05C",
     softPurple: "#8368EE",
+    SOSBlue: "#0d0047",
     white: "#ffffff",
     darkBlue: "#2c3e50",
     boxShadow: "#b5b5b5"
