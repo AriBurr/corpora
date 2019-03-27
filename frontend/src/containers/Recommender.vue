@@ -29,6 +29,9 @@
         margin="5px"
       >Update</StyledButton>
     </StyledDiv>
+    <StyledDiv v-if="chosenStoryWords.length">
+      <ChosenStoryWords :chosenWords="chosenStoryWords" :removeSingleWord="removeSingleWord"/>
+    </StyledDiv>
     <StyledDiv
       flexDirection="row"
       justifyContent="flex-start"
@@ -89,9 +92,7 @@
         />
       </StyledDiv>
     </StyledDiv>
-    <StyledDiv v-if="chosenStoryWords.length">
-      <ChosenStoryWords :chosenWords="chosenStoryWords" :removeSingleWord="removeSingleWord"/>
-    </StyledDiv>
+
     <StyledDiv minHeight="250px" :backgroundColor="styled(`lightGray`)" justifyContent="flex-start">
       <WordLengthSelection
         v-if="viewSelect === 1"
@@ -213,6 +214,16 @@ export default {
           .then(r => {
             console.log(r);
             this.phonemeRecommendations = r.data;
+          })
+          .catch(r => console.log("error -> " + r));
+        axios
+          .post("/generate_letter_recommendations/", {
+            letters: this.selectedLetters,
+            word_lengths: this.selectedWordLength
+          })
+          .then(r => {
+            console.log(r);
+            this.letterRecommendations = r.data;
           })
           .catch(r => console.log("error -> " + r));
       } else {

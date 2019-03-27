@@ -2,12 +2,11 @@
   <StyledDiv
     flexDirection="row"
     padding="10px 0"
+    margin="10px 0 0 0"
     :backgroundColor="styled('brightYellow')"
   >
     <StyledDiv width="20%" borderRight="2px solid black">
-      <StyledText :fontSize="styled('fontSize-mediumSmall')"
-        >Chosen Story Words</StyledText
-      >
+      <StyledText :fontSize="styled('fontSize-mediumSmall')">Chosen Story Words</StyledText>
     </StyledDiv>
     <StyledDiv flexWrap="wrap" flexDirection="row" width="80%">
       <StyledDiv
@@ -25,15 +24,11 @@
         padding="5px"
       >
         <StyledDiv minHeight="30px">
-          <StyledText :fontWeight="styled(`fontWeight-sevenHundred`)"
-            >Sound</StyledText
-          >
+          <StyledText :fontWeight="styled(`fontWeight-sevenHundred`)">Sound</StyledText>
           <StyledText>{{ single.grapheme }}</StyledText>
         </StyledDiv>
         <StyledDiv minHeight="30px">
-          <StyledText :fontWeight="styled(`fontWeight-sevenHundred`)"
-            >Word</StyledText
-          >
+          <StyledText :fontWeight="styled(`fontWeight-sevenHundred`)">Word</StyledText>
           <StyledText>{{ single.word }}</StyledText>
         </StyledDiv>
       </StyledDiv>

@@ -5,8 +5,8 @@
     margin="5px 1px"
     borderRadius="10px"
   >
-    <StyledSubHeader>Sound</StyledSubHeader>
-    <StyledDiv flexWrap="wrap" flexDirection="row">
+    <StyledSubHeader>Sound Recommendations</StyledSubHeader>
+    <StyledDiv flexWrap="wrap" flexDirection="row" maxHeight="400px" overflow="scroll">
       <StyledDiv
         v-for="single in phonemeRecommendations"
         :key="single.count * Math.random()"
@@ -22,15 +22,11 @@
         padding="5px"
       >
         <StyledDiv minHeight="30px">
-          <StyledText :fontWeight="styled(`fontWeight-sevenHundred`)"
-            >Sound</StyledText
-          >
+          <StyledText :fontWeight="styled(`fontWeight-sevenHundred`)">Sound</StyledText>
           <StyledText>{{ single.grapheme }}</StyledText>
         </StyledDiv>
         <StyledDiv minHeight="30px">
-          <StyledText :fontWeight="styled(`fontWeight-sevenHundred`)"
-            >Word</StyledText
-          >
+          <StyledText :fontWeight="styled(`fontWeight-sevenHundred`)">Word</StyledText>
           <StyledText>{{ single.word }}</StyledText>
         </StyledDiv>
       </StyledDiv>
