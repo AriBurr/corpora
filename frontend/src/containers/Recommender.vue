@@ -3,7 +3,7 @@
     :justifyContent="selectedLanguage ? 'space-around' : 'flex-start'"
     alignItems="flex-start"
   >
-    <StyledDiv height="60px" padding="50px 0">
+    <StyledDiv height="60px" padding="10px 0">
       <StyledHeader width="100%" height="5%">Recommender System</StyledHeader>
     </StyledDiv>
     <StyledDiv
