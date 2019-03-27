@@ -221,10 +221,9 @@ export default {
         // this.selectedWordLength.length > 0 &&
         this.selectedWordLength.includes(e)
       ) {
-        const update = this.selectedWordLength.filter(s => {
+        this.selectedWordLength = this.selectedWordLength.filter(s => {
           return s !== e;
         });
-        this.selectedWordLength = update;
       } else {
         this.selectedWordLength.push(e);
       }
