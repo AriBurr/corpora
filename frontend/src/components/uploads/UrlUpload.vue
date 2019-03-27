@@ -1,17 +1,7 @@
 <template>
   <div class="uploader-wrap">
-    <input
-      class="uploadInput"
-      placeholder="Title"
-      v-model="urlTitle"
-      type="text"
-    />
-    <input
-      class="uploadInput"
-      placeholder="URL"
-      v-model="urlItem"
-      type="text"
-    />
+    <StyledInput class="uploadInput" placeholder="Title" v-model="urlTitle" type="text"/>
+    <StyledInput class="uploadInput" placeholder="URL" v-model="urlItem" type="text"/>
     <StyledButton
       @click="
         event => {
@@ -21,16 +11,15 @@
       margin="20px 0 0 0"
       :borderColor="styled(`border`)"
       width="90%"
-      >Upload</StyledButton
-    >
+    >Upload</StyledButton>
   </div>
 </template>
 
 <script>
-import { StyledButton, ReadStyleGuide } from "../styled/index";
+import { StyledButton, ReadStyleGuide, StyledInput } from "../styled/index";
 
 export default {
-  components: { StyledButton },
+  components: { StyledButton, StyledInput },
   data() {
     return {
       urlItem: null,
@@ -52,17 +41,6 @@ export default {
 </script>
 
 <style>
-.uploadInput {
-  width: 75%;
-  text-align: center;
-  margin-top: 20px;
-  padding: 0 50px;
-  font-size: 16px;
-  height: 50px;
-  border-radius: 10px;
-  border: 2px solid gainsboro;
-  box-shadow: 0 0 15px 5px gainsboro;
-}
 .submitButton {
   width: 300px;
   border-radius: 10px;

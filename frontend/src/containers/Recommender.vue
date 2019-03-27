@@ -166,14 +166,14 @@ export default {
       capitalizedLetters: [],
       lowerCaseLetters: [],
       phonemeRecommendations: [
-        // { word: "i", grapheme: "i", count: 100 },
-        // { word: "am", grapheme: "m", count: 90 },
-        // { word: "am", grapheme: "a", count: 80 },
-        // { word: "see", grapheme: "ee", count: 70 },
-        // { word: "see", grapheme: "s", count: 60 },
-        // { word: "sam ", grapheme: "s", count: 50 },
-        // { word: "sam ", grapheme: "a", count: 40 },
-        // { word: "sam ", grapheme: "m", count: 30 }
+        { word: "i", grapheme: "i", count: 100 },
+        { word: "am", grapheme: "m", count: 90 },
+        { word: "am", grapheme: "a", count: 80 },
+        { word: "see", grapheme: "ee", count: 70 },
+        { word: "see", grapheme: "s", count: 60 },
+        { word: "sam ", grapheme: "s", count: 50 },
+        { word: "sam ", grapheme: "a", count: 40 },
+        { word: "sam ", grapheme: "m", count: 30 }
       ],
       letterRecommendations: [
         // { rec: "has", substr: "as", freq: 15 },

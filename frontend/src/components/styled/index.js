@@ -1,12 +1,14 @@
 import { sButton } from "./StyledButton";
 import { sDiv } from "./StyledDiv";
 import { sHeader } from "./StyledHeader";
+import { sInput } from "./StyledInput";
 import { sImage } from "./StyledImage";
 import { sSubHeader } from "./StyledSubHeader";
 import { sText } from "./StyledText";
 import { scrollDiv } from "./ScrollDiv";
 import GenericStyleGuide from "../../styles/ReadStyleGuide";
 
+export const StyledInput = sInput;
 export const StyledButton = sButton;
 export const StyledDiv = sDiv;
 export const StyledHeader = sHeader;

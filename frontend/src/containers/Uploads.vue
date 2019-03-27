@@ -1,10 +1,5 @@
 <template>
-  <StyledDiv
-    flexDirection="row"
-    height="100%"
-    alignItems="flex-start"
-    minHeight="700px"
-  >
+  <StyledDiv flexDirection="row" height="100%" alignItems="flex-start" minHeight="700px">
     <StyledDiv width="50%">
       <StyledHeader>Corpora Upload</StyledHeader>
       <LanguageSelect
@@ -13,10 +8,11 @@
         @languageSelection="languageSelection"
         passedTitle="Select a Language to upload:"
       />
-      <StyledDiv>
-        <StyledSubHeader :fontSize="styled(`fontSize-mediumSmall`)"
-          >How will you upload files?</StyledSubHeader
-        >
+      <StyledDiv v-if="selectedLanguage===`add`">
+        <AddLanguage :handleAddLanguage="handleAddLanguage"/>
+      </StyledDiv>
+      <StyledDiv v-if=" selectedLanguage !== `add`">
+        <StyledSubHeader :fontSize="styled(`fontSize-mediumSmall`)">How will you upload files?</StyledSubHeader>
         <StyledDiv flexDirection="row" width="50%" margin="20px 0">
           <RadioButton
             v-model="uploadType"
@@ -56,8 +52,7 @@
           v-if="uploadType === 2 && filesToUpload.length > 0"
           width="50%"
           v-on:click="submitFile()"
-          >Upload</StyledButton
-        >
+        >Upload</StyledButton>
       </StyledDiv>
       <ListFileUploads
         v-if="uploadType === 2 && filesToUpload.length > 0"
@@ -66,12 +61,7 @@
         :removeUploadedFile="removeUploadedFile"
       />
     </StyledDiv>
-    <StyledDiv
-      width="3px"
-      height="400px"
-      margin="auto 0"
-      :backgroundColor="styled(`darkBlue`)"
-    />
+    <StyledDiv width="3px" height="400px" margin="auto 0" :backgroundColor="styled(`darkBlue`)"/>
     <StyledDiv width="50%" justifyContent="flex-start">
       <RecentlyAdded
         :recentlyAdded="recentlyAdded"
@@ -88,14 +78,15 @@ import axios from "axios";
 import LanguageSelect from "../components/uploads/LanguageSelect";
 import URLUpload from "../components/uploads/URLUpload";
 import FileUpload from "../components/uploads/FileUpload";
+import AddLanguage from "../components/uploads/AddLanguage";
 import RadioButton from "../components/generics/RadioButton";
 import RecentlyAdded from "../components/uploads/RecentlyAdded";
 import ListFileUploads from "../components/uploads/ListFileUpload";
 import {
   StyledHeader,
-  StyledSubHeader,
   StyledDiv,
   StyledButton,
+  StyledSubHeader,
   ReadStyleGuide
 } from "../components/styled/index";
 import StyleCompiler from "../helpers/StyleCompiler";
@@ -106,6 +97,7 @@ export default {
     RecentlyAdded,
     RadioButton,
     URLUpload,
+    AddLanguage,
     FileUpload,
     ListFileUploads,
     StyledDiv,
@@ -124,9 +116,24 @@ export default {
     };
   },
   mounted() {
-    axios.get("/languages").then(r => (this.languages = r.data));
+    axios.get("/languages").then(r => {
+      this.languages = r.data;
+      this.languages.unshift({ id: "add", name: "Add Language" });
+    });
   },
   methods: {
+    handleAddLanguage(e) {
+      axios
+        .post("/add_language/", { language_name: e })
+        .then(r => {
+          this.language.push(r.data);
+          this.selectedLanguage = "";
+        })
+        .catch(a => {
+          console.log("bummer");
+          this.selectedLanguage = "";
+        });
+    },
     languageSelection(e) {
       this.selectedLanguage = e;
     },
