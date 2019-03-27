@@ -1,13 +1,12 @@
 <template>
   <StyledDiv>
-    <StyledSubHeader margin="10px 0" :fontSize="styled('fontSize-mediumSmall')"
-      >Alphabet Letter Selection</StyledSubHeader
-    >
+    <StyledSubHeader
+      margin="10px 0"
+      :fontSize="styled('fontSize-mediumSmall')"
+    >Alphabet Letter Selection</StyledSubHeader>
     <StyledDiv flexDirection="row" justifyContent="space-around">
       <StyledDiv width="45%" flexWrap="wrap">
-        <StyledText :fontWeight="styled('fontWeight-sevenHundred')"
-          >Capitalized</StyledText
-        >
+        <StyledText :fontWeight="styled('fontWeight-sevenHundred')">Capitalized</StyledText>
         <StyledDiv flexDirection="row" flexWrap="wrap">
           <StyledDiv
             v-for="letter in capitalizedLetters"
@@ -25,15 +24,12 @@
               lineHeight="0"
               :fontWeight="styled('fontWeight-sevenHundred')"
               :color="scopedStyled(`textC`, letter)"
-              >{{ letter.title }}</StyledText
-            >
+            >{{ determineLetter(letter.title) }}</StyledText>
           </StyledDiv>
         </StyledDiv>
       </StyledDiv>
       <StyledDiv width="45%" flexWrap="wrap">
-        <StyledText :fontWeight="styled('fontWeight-sevenHundred')"
-          >Lower Case</StyledText
-        >
+        <StyledText :fontWeight="styled('fontWeight-sevenHundred')">Lower Case</StyledText>
         <StyledDiv flexDirection="row" flexWrap="wrap">
           <StyledDiv
             v-for="letter in lowerCaseLetters"
@@ -48,11 +44,11 @@
             cursor="pointer"
           >
             <StyledText
+              lang="es"
               lineHeight="0"
               :fontWeight="styled('fontWeight-sevenHundred')"
               :color="scopedStyled(`textC`, letter)"
-              >{{ letter.title }}</StyledText
-            >
+            >{{determineLetter(letter.title)}}</StyledText>
           </StyledDiv>
         </StyledDiv>
       </StyledDiv>
@@ -72,7 +68,19 @@ export default {
     "lowerCaseLetters",
     "handleLetterSelection"
   ],
+  computed: {},
   methods: {
+    determineLetter(e) {
+      const first = e.split("")[0];
+      console.log(first);
+      if (first === "&") {
+        console.log("found it");
+        console.log(e);
+        return `\xc0`;
+      } else {
+        return e;
+      }
+    },
     styled(e) {
       return StyleCompiler(e);
     },
