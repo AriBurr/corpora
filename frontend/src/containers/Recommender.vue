@@ -211,9 +211,7 @@ export default {
             word_length: this.selectedWordLength
           })
           .then(r => {
-            console.log("fart");
-            console.log(r);
-            this.updateRecommendations(r.data);
+            this.phonemeRecommendations(r.data);
           })
           .catch(r => console.log("error -> " + r));
       } else {
