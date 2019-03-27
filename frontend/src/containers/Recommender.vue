@@ -217,10 +217,7 @@ export default {
       }
     },
     handleWordLength(e) {
-      if (
-        // this.selectedWordLength.length > 0 &&
-        this.selectedWordLength.includes(e)
-      ) {
+      if (this.selectedWordLength.includes(e)) {
         this.selectedWordLength = this.selectedWordLength.filter(s => {
           return s !== e;
         });
