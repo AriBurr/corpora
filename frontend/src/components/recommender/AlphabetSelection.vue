@@ -3,7 +3,7 @@
     <StyledSubHeader margin="10px 0" :fontSize="styled('fontSize-mediumSmall')"
       >Alphabet Letter Selection</StyledSubHeader
     >
-    <StyledDiv flexDirection="row">
+    <StyledDiv flexDirection="row" justifyContent="space-around">
       <StyledDiv width="45%" flexWrap="wrap">
         <StyledText :fontWeight="styled('fontWeight-sevenHundred')"
           >Capitalized</StyledText

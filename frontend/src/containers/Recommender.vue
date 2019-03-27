@@ -22,9 +22,9 @@
         :selectedPhoneme="selectedPhoneme"
       />
       <StyledButton
-        :color="styled(`buttonColor`)"
-        :backgroundColor="styled(`buttonBG`)"
-        :borderColor="styled(`buttonBG`)"
+        :color="styled(`white`)"
+        :backgroundColor="styled(`lightGreen`)"
+        :borderColor="styled(`lightGreen`)"
         @click="handleGeneration"
         width="20%"
         height="100%"
@@ -51,20 +51,22 @@
           v-on:click="viewSelect = single.func"
           v-for="(single, i) in toolkitButtons"
           :key="i"
-          width="150px"
+          width="100%"
           minHeight="30px"
-          margin="5px 0"
           cursor="pointer"
-          backgroundColor="white"
+          :backgroundColor="
+            viewSelect === single.func
+              ? styled('brightYellow')
+              : styled('white')
+          "
           hoverBrightness="brightness(90%)"
-          :border="
+          :borderBottom="
             `2px solid ${
               viewSelect === single.func
-                ? styled('lightRed')
-                : styled('brightYellow')
+                ? styled('darkBlue')
+                : styled('lightGray')
             }`
           "
-          borderRadius="10px"
         >
           <StyledText>{{ single.title }}</StyledText>
         </StyledDiv>
@@ -216,11 +218,11 @@ export default {
     },
     handleWordLength(e) {
       if (
-        this.selectedWordLength.length > 0 &&
+        // this.selectedWordLength.length > 0 &&
         this.selectedWordLength.includes(e)
       ) {
         const update = this.selectedWordLength.filter(s => {
-          return s.id !== e.id;
+          return s !== e;
         });
         this.selectedWordLength = update;
       } else {

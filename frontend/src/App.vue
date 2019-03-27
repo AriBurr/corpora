@@ -3,7 +3,7 @@
     <FlashMessage />
     <div id="header-nav" class="nav-bars">
       <div class="nav-design">
-        <router-link class="routerLink" to="/home">Home</router-link>
+        <router-link class="routerLink" to="/">Home</router-link>
         <router-link class="routerLink routerLinkBorder" to="/uploads"
           >Uploads</router-link
         >
