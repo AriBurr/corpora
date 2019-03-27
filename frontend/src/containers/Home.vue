@@ -1,5 +1,5 @@
 <template>
-  <StyledDiv class="home" height="418px">
+  <StyledDiv class="home" height="418px" minHeight="700px">
     <StyledHeader margin="0 5px" class="read-header">READ Toolkit</StyledHeader>
   </StyledDiv>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <StyledDiv justifyContent="flex-start" width="75%">
-    <StyledSubHeader margin="20px 0" :fontSize="styled(`font-mediumSmall`)"
+    <StyledSubHeader margin="10px 0" :fontSize="styled(`font-mediumSmall`)"
       >Word Length</StyledSubHeader
     >
     <StyledDiv flexDirection="row" flexWrap="wrap">

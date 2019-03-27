@@ -2,16 +2,12 @@
   <StyledDiv
     :justifyContent="selectedLanguage ? 'space-around' : 'flex-start'"
     alignItems="flex-start"
+    minHeight="700px"
   >
     <StyledDiv height="60px" padding="10px 0">
       <StyledHeader width="100%" height="5%">Recommender System</StyledHeader>
     </StyledDiv>
-    <StyledDiv
-      flexDirection="row"
-      justifyContent="space-around"
-      height="100px"
-      marginTop="20px"
-    >
+    <StyledDiv flexDirection="row" justifyContent="space-around" height="100px">
       <LanguageSelect
         :recommender="true"
         v-model="selectedLanguage"
@@ -105,7 +101,8 @@
         v-if="viewSelect === 2"
         :handleLetterSelection="handleLetterSelection"
         :selectedLetters="selectedLetters"
-        :letters="letterListFromLanguage"
+        :capitalizedLetters="capitalizedLetters"
+        :lowerCaseLetters="lowerCaseLetters"
       />
       <PhonemeSelection
         v-if="viewSelect === 3"
@@ -162,7 +159,8 @@ export default {
       selectedLetters: [],
       languages: [],
       phonemeList: [],
-      letterListFromLanguage: [],
+      capitalizedLetters: [],
+      lowerCaseLetters: [],
       generatedRecommendations: [],
       toolkitButtons: [
         { title: "Word Length", func: 1 },
@@ -205,11 +203,12 @@ export default {
       switch (this.selectedLanguage) {
         case "1":
           this.phonemeList = PhonemeList.english;
-          this.letterListFromLanguage = AlphabetList.english;
+          this.capitalizedLetters = AlphabetList.english.capitalized;
+          this.lowerCaseLetters = AlphabetList.english.lowerCase;
           return;
         case "2":
           this.phonemeList = PhonemeList.spanish;
-          this.letterListFromLanguage = AlphabetList.spanish;
+          this.capitalizedLetters = AlphabetList.spanish;
           return;
         default:
           return;

@@ -1,6 +1,6 @@
 <template>
   <StyledDiv justifyContent="flex-start">
-    <StyledSubHeader margin="20px 0" :fontSize="styled(`subHeaderFS`)"
+    <StyledSubHeader margin="10px 0" :fontSize="styled(`subHeaderFS`)"
       >Phoneme Selection</StyledSubHeader
     >
     <StyledDiv
@@ -22,9 +22,9 @@
         v-for="single of phonemeList"
         :key="single.value"
       >
-        <StyledSubHeader margin="0 10px 0 0">
-          {{ single.title }}
-        </StyledSubHeader>
+        <StyledSubHeader margin="0 10px 0 0">{{
+          single.title
+        }}</StyledSubHeader>
         <Checkbox
           :checked="amIChecked(item)"
           recommender="true"

@@ -1,5 +1,10 @@
 <template>
-  <StyledDiv flexDirection="row" height="100%" alignItems="flex-start">
+  <StyledDiv
+    flexDirection="row"
+    height="100%"
+    alignItems="flex-start"
+    minHeight="700px"
+  >
     <StyledDiv width="50%">
       <StyledHeader>Corpora Upload</StyledHeader>
       <LanguageSelect
