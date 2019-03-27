@@ -28,20 +28,20 @@ class RecommenderService(object):
 
     @staticmethod
     def recommendations_by_phonemes(data):
-        phoneme_data = [p for p in data["phonemes"]]
+        phoneme_data = [[p] for p in data["phonemes"]]
+        recommendations = []
         with connection.cursor() as cursor:
-            recommendations = []
+            create_temp_table = "CREATE TEMPORARY TABLE temp_patterns (pattern VARCHAR(255));"
+            cursor.execute(create_temp_table)
+            insert_patterns = "INSERT INTO temp_patterns VALUES (%s);"
+            cursor.executemany(insert_patterns, phoneme_data)
             for word_length in data["word_lengths"]:
-                create_temp_table = "CREATE TEMPORARY TABLE patterns (pattern VARCHAR(255));"
-                insert_patterns = "INSERT INTO patterns VALUES (%s);"
-                return_strings = f"SELECT word, p.pattern, count FROM words_word JOIN patterns p ON (words_word.word LIKE '%' || p.pattern || '%') WHERE length={word_length} ORDER BY frequency DESC LIMIT 25"
-                delete_temp_table = "DROP TABLE patterns"
-                cursor.execute(create_temp_table)
-                cursor.executemany(insert_patterns, phoneme_data)
+                return_strings = f"SELECT word, p.pattern, count FROM words_word JOIN temp_patterns p ON (words_word.word LIKE '%' || p.pattern || '%') WHERE length={word_length}"
                 cursor.execute(return_strings)
                 response = cursor.fetchall()
                 recommendations.extend(response)
-                cursor.execute(delete_temp_table)
+            delete_temp_table = "DROP TABLE temp_patterns"
+            cursor.execute(delete_temp_table)
             cursor.close()
             recs = [{"word": recs[0], "grapheme": recs[1], "count": recs[2]} for recs in recommendations]
             phoneme_string = "".join(data["phonemes"])

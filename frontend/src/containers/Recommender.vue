@@ -208,9 +208,10 @@ export default {
         axios
           .post("/generate_phoneme_recommendations/", {
             phonemes: titles,
-            word_length: this.selectedWordLength
+            word_lengths: this.selectedWordLength
           })
           .then(r => {
+            console.log(r);
             this.phonemeRecommendations(r.data);
           })
           .catch(r => console.log("error -> " + r));
