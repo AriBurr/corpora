@@ -14,7 +14,7 @@
         passedTitle="Select a Language to upload:"
       />
       <StyledDiv>
-        <StyledSubHeader :fontSize="styled(`subHeaderFS`)"
+        <StyledSubHeader :fontSize="styled(`fontSize-mediumSmall`)"
           >How will you upload files?</StyledSubHeader
         >
         <StyledDiv flexDirection="row" width="50%" margin="20px 0">
@@ -68,9 +68,9 @@
     </StyledDiv>
     <StyledDiv
       width="3px"
-      height="90%"
-      margin="auto"
-      :backgroundColor="styled(`bg`)"
+      height="400px"
+      margin="auto 0"
+      :backgroundColor="styled(`darkBlue`)"
     />
     <StyledDiv width="50%" justifyContent="flex-start">
       <RecentlyAdded
@@ -98,6 +98,7 @@ import {
   StyledButton,
   ReadStyleGuide
 } from "../components/styled/index";
+import StyleCompiler from "../helpers/StyleCompiler";
 
 export default {
   components: {
@@ -209,15 +210,7 @@ export default {
       cb && cb();
     },
     styled(e) {
-      if (e === "radioFlexD") {
-        return "row";
-      } else if (e === "radioWidth") {
-        return "50%";
-      } else if (e === "bg") {
-        return ReadStyleGuide.color.darkBlue;
-      } else if (e === "subHeaderFS") {
-        return ReadStyleGuide.font.size.mediumSmall;
-      }
+      return StyleCompiler(e);
     }
   }
 };

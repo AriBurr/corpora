@@ -1,64 +1,95 @@
 <template>
   <StyledDiv
-    width="60%"
+    width="50%"
     margin="10px 0"
     height="100%"
-    :border="styled(`border`)"
+    :border="`2px solid ${styled(`lightOrange`)}`"
     borderRadius="10px"
+    alignItems="flex-start"
   >
-    <StyledSubHeader>User Selections</StyledSubHeader>
     <StyledDiv
-      flexDirection="row"
-      height="60px"
-      alignSelf="center"
-      width="100%"
-      justifyContent="space-between"
+      :borderBottom="`2px solid ${styled(`darkBlue`)}`"
+      width="75%"
+      margin="0 auto"
     >
-      <StyledDiv height="100%" justifyContent="center">
-        <StyledText :fontWeight="styled(`fw`)">Word Length:</StyledText>
-        <StyledText>
-          {{ selectedWordLength.length > 0 ? selectedWordLength : "" }}
+      <StyledSubHeader
+        :fontWeight="styled(`fontWeight-sevenHundred`)"
+        :fontSize="styled(`fontSize-mediumSmall`)"
+        >Recommender Settings</StyledSubHeader
+      >
+    </StyledDiv>
+    <StyledDiv
+      height="30%"
+      justifyContent="flex-start"
+      marginLeft="5px"
+      flexDirection="row"
+    >
+      <StyledText :fontWeight="styled(`fontWeight-sevenHundred`)"
+        >Word Length:</StyledText
+      >
+      <StyledText
+        v-for="(single, i) in selectedWordLength"
+        :key="single * Math.random()"
+      >
+        {{ "&nbsp;" + single
+        }}{{ i !== selectedWordLength.length - 1 ? ", " : null
+        }}{{ i === selectedWordLength.length - 1 ? " letters" : null }}
+      </StyledText>
+    </StyledDiv>
+    <StyledDiv
+      height="30%"
+      justifyContent="flex-start"
+      marginLeft="5px"
+      flexDirection="row"
+    >
+      <StyledText :fontWeight="styled(`fontWeight-sevenHundred`)"
+        >Letters:</StyledText
+      >
+      <StyledDiv flexDirection="row" justifyContent="flex-start">
+        <StyledText
+          v-for="(single, i) in selectedLetters"
+          :key="single + parseInt(Math.random())"
+        >
+          {{ "&nbsp;" + single
+          }}{{
+            selectedLetters.length > 1 && i !== selectedLetters.length - 1
+              ? `, `
+              : null
+          }}
         </StyledText>
       </StyledDiv>
-      <StyledDiv width="50%" height="100%" justifyContent="center">
-        <StyledText :fontWeight="styled(`fw`)">Letters:</StyledText>
-        <StyledDiv flexDirection="row">
-          <StyledText v-for="(single, i) in selectedLetters" :key="single">
-            {{ single
-            }}{{
-              selectedLetters.length > 1 && i !== selectedLetters.length - 1
-                ? `, `
-                : null
-            }}
-          </StyledText>
-        </StyledDiv>
-      </StyledDiv>
-      <StyledDiv height="100%">
-        <StyledText :fontWeight="styled(`fw`)">Phoneme:</StyledText>
-        <StyledDiv flexDirection="row">
-          <StyledText v-for="(single, i) in selectedPhoneme" :key="single">
-            {{ single.title
-            }}{{
-              selectedPhoneme.length > 1 && i !== selectedPhoneme.length - 1
-                ? `, `
-                : null
-            }}
-          </StyledText>
-        </StyledDiv>
+    </StyledDiv>
+    <StyledDiv
+      height="30%"
+      justifyContent="flex-start"
+      marginLeft="5px"
+      flexDirection="row"
+    >
+      <StyledText :fontWeight="styled(`fontWeight-sevenHundred`)"
+        >Sounds:</StyledText
+      >
+      <StyledDiv flexDirection="row" justifyContent="flex-start">
+        <StyledText
+          v-for="(single, i) in selectedPhoneme"
+          :key="single.title + parseInt(Math.random())"
+        >
+          {{ "&nbsp;" + single.title
+          }}{{
+            selectedPhoneme.length > 1 && i !== selectedPhoneme.length - 1
+              ? `, `
+              : null
+          }}
+        </StyledText>
       </StyledDiv>
     </StyledDiv>
   </StyledDiv>
 </template>
 
 <script>
-import {
-  StyledText,
-  StyledDiv,
-  ReadStyleGuide,
-  StyledSubHeader
-} from "../styled";
+import { StyledText, StyledDiv, StyledSubHeader } from "../styled";
+import StyleCompiler from "../../helpers/StyleCompiler";
 export default {
-  components: { StyledDiv, StyledSubHeader, StyledText },
+  components: { StyledDiv, StyledText, StyledSubHeader },
   props: [
     "selectedLanguage",
     "selectedLetters",
@@ -67,11 +98,7 @@ export default {
   ],
   methods: {
     styled(e) {
-      if (e === "fw") {
-        return ReadStyleGuide.font.weight.sevenHundred;
-      } else if (e === "border") {
-        return `2px solid ${ReadStyleGuide.color.lightOrange}`;
-      }
+      return StyleCompiler(e);
     }
   }
 };

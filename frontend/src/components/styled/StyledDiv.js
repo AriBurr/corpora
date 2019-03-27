@@ -12,7 +12,7 @@ export const sDiv = styled("div", themeProps)`
   ${props =>
     props.backgroundImage
       ? `background-image: url(${props.backgroundImage}`
-      : null} );
+      : null}
   background-repeat: ${props => props.backgroundRepeat || "no-repeat"};
   ${props =>
     props.backgroundAttachment

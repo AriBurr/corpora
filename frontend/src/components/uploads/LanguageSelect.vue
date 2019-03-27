@@ -5,10 +5,11 @@
     :margin="recommender ? '5px' : null"
     :width="recommender ? '20%' : null"
     :height="recommender ? '100%' : null"
+    :minWidth="recommender ? '210px' : null"
   >
-    <StyledSubHeader :fontSize="styled(`subHeaderFS`)">{{
-      passedTitle
-    }}</StyledSubHeader>
+    <StyledSubHeader :fontSize="styled(`subHeaderFS`)">
+      {{ passedTitle }}
+    </StyledSubHeader>
     <select
       style="line-height: 1.5; padding: 0 5px"
       v-model="selectedLanguage"

@@ -13,7 +13,7 @@
       v-model="checked"
       :value="passedValue"
       @change="passedFunc(item)"
-    />
+    >
   </StyledDiv>
 </template>
 

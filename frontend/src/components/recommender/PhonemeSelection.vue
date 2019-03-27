@@ -1,12 +1,10 @@
 <template>
   <StyledDiv justifyContent="flex-start">
     <StyledSubHeader margin="10px 0" :fontSize="styled(`subHeaderFS`)"
-      >Phoneme Selection</StyledSubHeader
+      >Select Sounds</StyledSubHeader
     >
     <StyledDiv
       flexDirection="row"
-      height="150px"
-      overflow="scroll"
       margin="0 0 15px 0"
       flexWrap="wrap"
       alignItems="flex-start"
@@ -20,11 +18,11 @@
         maxHeight="150px"
         minWidth="300px"
         v-for="single of phonemeList"
-        :key="single.value"
+        :key="single.id * Math.random()"
       >
-        <StyledSubHeader margin="0 10px 0 0">{{
-          single.title
-        }}</StyledSubHeader>
+        <StyledSubHeader margin="0 10px 0 0">
+          {{ single.title }}
+        </StyledSubHeader>
         <Checkbox
           :checked="amIChecked(item)"
           recommender="true"

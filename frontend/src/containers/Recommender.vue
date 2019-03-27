@@ -4,10 +4,7 @@
     alignItems="flex-start"
     minHeight="700px"
   >
-    <StyledDiv height="60px" padding="10px 0">
-      <StyledHeader width="100%" height="5%">Recommender System</StyledHeader>
-    </StyledDiv>
-    <StyledDiv flexDirection="row" justifyContent="space-around" height="100px">
+    <StyledDiv flexDirection="row" justifyContent="space-around" height="100px" marginTop="20px">
       <LanguageSelect
         :recommender="true"
         v-model="selectedLanguage"
@@ -28,9 +25,9 @@
         @click="handleGeneration"
         width="20%"
         height="100%"
+        minWidth="20%"
         margin="5px"
-        >Update</StyledButton
-      >
+      >Update</StyledButton>
     </StyledDiv>
     <StyledDiv
       flexDirection="row"
@@ -71,29 +68,31 @@
           <StyledText>{{ single.title }}</StyledText>
         </StyledDiv>
       </StyledDiv>
+      <StyledDiv height="95%" :backgroundColor="styled('darkBlue')" width="2px" margin="auto 0"/>
       <StyledDiv
-        height="75%"
-        :backgroundColor="styled('lightGray')"
-        width="2px"
-        margin="auto 0"
-      />
-      <StyledDiv
+        flexDirection="row"
         justifyContent="flex-start"
         alignItems="flex-start"
         height="100%"
         width="80%"
       >
-        <DisplayRecommendations
-          v-if="generatedRecommendations.length"
-          :generatedRecommendations="generatedRecommendations"
+        <LetterRecommendations
+          v-if="letterRecommendations.length"
+          :letterRecommendations="letterRecommendations"
+          :phonemeRecommendations="phonemeRecommendations"
+        />
+        <PhonemeRecommendations
+          v-if="phonemeRecommendations.length"
+          :letterRecommendations="letterRecommendations"
+          :phonemeRecommendations="sortedPhonemes"
+          :handleChosenWords="handleChosenWords"
         />
       </StyledDiv>
     </StyledDiv>
-    <StyledDiv
-      minHeight="250px"
-      :backgroundColor="styled(`lightGray`)"
-      justifyContent="flex-start"
-    >
+    <StyledDiv v-if="chosenStoryWords.length">
+      <ChosenStoryWords :chosenWords="chosenStoryWords" :removeSingleWord="removeSingleWord"/>
+    </StyledDiv>
+    <StyledDiv minHeight="250px" :backgroundColor="styled(`lightGray`)" justifyContent="flex-start">
       <WordLengthSelection
         v-if="viewSelect === 1"
         :handleWordLength="handleWordLength"
@@ -122,9 +121,11 @@ import PhonemeList from "../helpers/PhonemeList";
 import AlphabetList from "../helpers/AlphabetList";
 import StyleCompiler from "../helpers/StyleCompiler";
 
+import LetterRecommendations from "../components/recommender/LetterRecommendations";
+import PhonemeRecommendations from "../components/recommender/PhonemeRecommendations";
+import ChosenStoryWords from "../components/recommender/ChosenStoryWords";
 import UserSelections from "../components/recommender/UserSelections";
 import LanguageSelect from "../components/uploads/LanguageSelect";
-import DisplayRecommendations from "../components/recommender/DisplayRecommendations";
 import WordLengthSelection from "../components/recommender/WordLengthSelection";
 import PhonemeSelection from "../components/recommender/PhonemeSelection";
 import AlphabetSelection from "../components/recommender/AlphabetSelection";
@@ -133,20 +134,20 @@ import {
   StyledDiv,
   StyledSubHeader,
   StyledText,
-  StyledButton,
-  StyledHeader
+  StyledButton
 } from "../components/styled/index.js";
 
 export default {
   name: "Recommender",
   components: {
     StyledDiv,
-    StyledHeader,
     StyledSubHeader,
     StyledText,
     StyledButton,
+    ChosenStoryWords,
     UserSelections,
-    DisplayRecommendations,
+    LetterRecommendations,
+    PhonemeRecommendations,
     WordLengthSelection,
     PhonemeSelection,
     LanguageSelect,
@@ -158,29 +159,55 @@ export default {
       selectedLanguage: false,
       viewSelect: 0,
       selectedPhoneme: [],
+      chosenStoryWords: [],
       selectedLetters: [],
       languages: [],
       phonemeList: [],
       capitalizedLetters: [],
       lowerCaseLetters: [],
-      generatedRecommendations: [],
+      phonemeRecommendations: [
+        // { word: "i", grapheme: "i", count: 100 },
+        // { word: "am", grapheme: "m", count: 90 },
+        // { word: "am", grapheme: "a", count: 80 },
+        // { word: "see", grapheme: "ee", count: 70 },
+        // { word: "see", grapheme: "s", count: 60 },
+        // { word: "sam ", grapheme: "s", count: 50 },
+        // { word: "sam ", grapheme: "a", count: 40 },
+        // { word: "sam ", grapheme: "m", count: 30 }
+      ],
+      letterRecommendations: [
+        // { rec: "has", substr: "as", freq: 15 },
+        // { rec: "its", substr: "it", freq: 5 },
+        // { rec: "see", substr: "se", freq: 5 },
+        // { rec: "sit", substr: "si", freq: 5 }
+      ],
       toolkitButtons: [
         { title: "Word Length", func: 1 },
-        { title: "Alphabet", func: 2 },
-        { title: "Sound", func: 3 }
+        { title: "Letters", func: 2 },
+        { title: "Sounds", func: 3 }
       ]
     };
+  },
+  computed: {
+    sortedPhonemes() {
+      function compare(a, b) {
+        if (a.count > b.count) return -1;
+        if (b.count > a.count) return 1;
+        return 0;
+      }
+      return this.phonemeRecommendations.sort(compare);
+    }
   },
   mounted() {
     axios.get("/languages").then(r => (this.languages = r.data));
   },
   methods: {
     handleGeneration() {
-      console.log("handle genertation");
-      if (this.selectedLetters.length >= 4 && this.selectedWordLength !== 0) {
+      if (this.selectedPhoneme.length >= 1 && this.selectedWordLength !== 0) {
+        const titles = this.selectedPhoneme.map(s => s.title);
         axios
-          .post("/generate_recommendations/", {
-            letters: this.selectedLetters.join(""),
+          .post("/generate_phoneme_recommendations/", {
+            phonemes: titles,
             word_length: this.selectedWordLength
           })
           .then(r => {
@@ -217,12 +244,19 @@ export default {
       }
     },
     handleWordLength(e) {
+      function compare(a, b) {
+        if (a > b) return 1;
+        if (b > a) return -1;
+        return 0;
+      }
       if (this.selectedWordLength.includes(e)) {
         this.selectedWordLength = this.selectedWordLength.filter(s => {
           return s !== e;
         });
+        this.selectedWordLength.sort(compare);
       } else {
         this.selectedWordLength.push(e);
+        this.selectedWordLength.sort(compare);
       }
     },
     languageSelection(e) {
@@ -246,6 +280,20 @@ export default {
     },
     handleViewSelect(e) {
       return (this.viewSelect = e);
+    },
+    handleChosenWords(e) {
+      const single = { count: e.count, grapheme: e.grapheme, word: e.word };
+      this.chosenStoryWords.push(single);
+      this.phonemeRecommendations = this.phonemeRecommendations.filter(r => {
+        return r.grapheme !== single.grapheme || r.word !== single.word;
+      });
+    },
+    removeSingleWord(e) {
+      const single = { count: e.count, grapheme: e.grapheme, word: e.word };
+      this.chosenStoryWords = this.chosenStoryWords.filter(r => {
+        return r.grapheme !== single.grapheme || r.word !== single.word;
+      });
+      this.phonemeRecommendations.push(single);
     },
     styled(e) {
       return StyleCompiler(e);
