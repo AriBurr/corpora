@@ -29,7 +29,7 @@
         width="20%"
         height="100%"
         margin="5px"
-        >Generate Recommendations</StyledButton
+        >Update</StyledButton
       >
     </StyledDiv>
     <StyledDiv
@@ -90,7 +90,7 @@
       </StyledDiv>
     </StyledDiv>
     <StyledDiv
-      height="250px"
+      minHeight="250px"
       :backgroundColor="styled(`lightGray`)"
       justifyContent="flex-start"
     >
