@@ -28,7 +28,6 @@ export default {
 
 <style lang="scss">
 body {
-  overflow: hidden;
   margin: 0;
 }
 h1,
@@ -44,8 +43,7 @@ span {
 }
 
 .router-wrap {
-  margin: 50px 0px;
-  height: 90vh;
+  margin: 50px 0px 60px 0;
 }
 
 .routerLink {
@@ -73,7 +71,6 @@ span {
   .nav-bars {
     display: flex;
     position: fixed;
-    height: 5vh;
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -104,13 +101,14 @@ span {
 
   #header-nav {
     background-color: cornflowerblue;
+
+    height: 50px;
     top: 0;
     left: 0;
   }
 
   #footer-nav {
-    bottom: 0;
-    left: 0;
+    height: 50px;
   }
 }
 </style>

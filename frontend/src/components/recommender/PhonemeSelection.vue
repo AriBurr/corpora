@@ -1,34 +1,43 @@
 <template>
-  <StyledDiv
-    :border="styled(`border`)"
-    padding="10px 0"
-    maxHeight="350px"
-    borderRadius="10px"
-  >
-    <StyledSubHeader :fontSize="styled(`subHeaderFS`)"
+  <StyledDiv justifyContent="flex-start">
+    <StyledSubHeader margin="20px 0" :fontSize="styled(`subHeaderFS`)"
       >Phoneme Selection</StyledSubHeader
     >
     <StyledDiv
-      class="radioBoxes"
-      width="95%"
-      maxHeight="150px"
+      flexDirection="row"
       height="150px"
       overflow="scroll"
-      flexDirection="row"
+      margin="0 0 15px 0"
       flexWrap="wrap"
       alignItems="flex-start"
       justifyContent="flex-start"
     >
-      <Checkbox
-        recommender="true"
+      <StyledDiv
+        justifyContent="flex-start"
+        class="radioBoxes"
+        width="33%"
+        flexDirection="row"
+        maxHeight="150px"
+        minWidth="300px"
         v-for="single of phonemeList"
-        :key="single.id"
-        v-model="selectedPhoneme"
-        :passedFunc="handlePhonemeSelection"
-        passedName="wordLength"
-        :passedTitle="single.title"
-        :passedValue="single.value"
-      />
+        :key="single.value"
+      >
+        <StyledSubHeader margin="0 10px 0 0">
+          {{ single.title }}
+        </StyledSubHeader>
+        <Checkbox
+          :checked="amIChecked(item)"
+          recommender="true"
+          v-for="item of single.grapheme"
+          :key="item.value"
+          v-model="selectedPhoneme"
+          :passedFunc="handlePhonemeSelection"
+          passedName="wordLength"
+          :item="item"
+          :passedTitle="item.title"
+          :passedValue="item.value"
+        />
+      </StyledDiv>
     </StyledDiv>
   </StyledDiv>
 </template>
@@ -40,6 +49,9 @@ export default {
   components: { Checkbox, StyledDiv, StyledSubHeader },
   props: ["handlePhonemeSelection", "selectedPhoneme", "phonemeList"],
   methods: {
+    amIChecked(e) {
+      return this.selectedPhoneme.some(s => s.value === e.value);
+    },
     styled(e) {
       if (e === "border") {
         return `2px solid ${ReadStyleGuide.color.darkBlue}`;

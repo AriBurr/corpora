@@ -1,5 +1,5 @@
 import styled from "vue-styled-components";
-import themeProps from "./ThemeProps";
+import { themeProps } from "./ThemeProps";
 import { media } from "./MediaSizes";
 
 export const sImage = styled("img", themeProps)`

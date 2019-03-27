@@ -1,6 +1,6 @@
 <template>
-  <StyledDiv margin="5px 0" height="25%" :backgroundColor="styled(`wrapperBG`)">
-    <StyledSubHeader :fontSize="styled(`subHeaderFS`)"
+  <StyledDiv>
+    <StyledSubHeader margin="20px 0" :fontSize="styled('fontSize-mediumSmall')"
       >Alphabet Letter Selection</StyledSubHeader
     >
     <StyledDiv flexDirection="row" width="75%" flexWrap="wrap">
@@ -10,17 +10,16 @@
         :key="letter.id"
         width="50px"
         height="50px"
-        margin="1px"
+        margin="2px"
         borderRadius="5px"
-        :border="styled(`border`)"
-        :backgroundColor="styled(`bg`, letter)"
+        :backgroundColor="scopedStyled(`bg`, letter)"
         hoverBrightness="brightness(90%)"
         cursor="pointer"
       >
         <StyledText
           lineHeight="0"
-          :fontWeight="styled(`titleWeight`)"
-          :color="styled(`textC`, letter)"
+          :fontWeight="styled('fontWeight-sevenHundred')"
+          :color="scopedStyled(`textC`, letter)"
           >{{ letter.title }}</StyledText
         >
       </StyledDiv>
@@ -31,25 +30,21 @@
 <script>
 import { StyledDiv, StyledSubHeader, StyledText } from "../styled/index";
 import { ReadStyleGuide } from "../styled";
+import StyleCompiler from "../../helpers/StyleCompiler";
 export default {
   components: { StyledDiv, StyledSubHeader, StyledText },
   props: ["selectedLetters", "letters", "handleLetterSelection"],
   methods: {
-    styled(e, l) {
+    styled(e) {
+      return StyleCompiler(e);
+    },
+    scopedStyled(e, l) {
       if (e === "bg") {
         if (this.selectedLetters.includes(l.title)) {
           return ReadStyleGuide.color.lightGreen;
         } else {
           return ReadStyleGuide.color.white;
         }
-      } else if (e === "subHeaderFS") {
-        return ReadStyleGuide.font.size.mediumSmall;
-      } else if (e === "titleWeight") {
-        return ReadStyleGuide.font.weight.sevenHundred;
-      } else if (e === "border") {
-        return `1px solid ${ReadStyleGuide.color.lightGray}`;
-      } else if (e === "wrapperBG") {
-        return ReadStyleGuide.color.lightGray;
       } else if (e === "textC") {
         if (this.selectedLetters.includes(l.title)) {
           return ReadStyleGuide.color.SOSBlue;

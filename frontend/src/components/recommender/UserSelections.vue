@@ -16,7 +16,9 @@
     >
       <StyledDiv height="100%" justifyContent="center">
         <StyledText :fontWeight="styled(`fw`)">Word Length:</StyledText>
-        <StyledText>{{ selectedWordLength }}</StyledText>
+        <StyledText>
+          {{ selectedWordLength.length > 0 ? selectedWordLength : "" }}
+        </StyledText>
       </StyledDiv>
       <StyledDiv width="50%" height="100%" justifyContent="center">
         <StyledText :fontWeight="styled(`fw`)">Letters:</StyledText>
@@ -35,7 +37,7 @@
         <StyledText :fontWeight="styled(`fw`)">Phoneme:</StyledText>
         <StyledDiv flexDirection="row">
           <StyledText v-for="(single, i) in selectedPhoneme" :key="single">
-            {{ single
+            {{ single.title
             }}{{
               selectedPhoneme.length > 1 && i !== selectedPhoneme.length - 1
                 ? `, `

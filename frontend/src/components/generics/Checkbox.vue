@@ -1,17 +1,18 @@
 <template>
   <StyledDiv
-    flexDirection="row"
-    :margin="recommender ? null : '5px 0'"
+    :flexDirection="recommender ? 'column' : 'row'"
+    :margin="recommender ? '0 5px' : '5px 0'"
     :height="recommender ? '30px' : null"
-    :width="recommender ? '50%' : null"
+    :width="recommender ? 'initial' : null"
   >
     <StyledText>{{ passedTitle }}</StyledText>
     <input
+      checked="checked"
       type="checkbox"
       name="passedName"
-      v-model="uploadType"
+      v-model="checked"
       :value="passedValue"
-      @change="passedFunc(passedValue)"
+      @change="passedFunc(item)"
     />
   </StyledDiv>
 </template>
@@ -30,7 +31,9 @@ export default {
     passedValue: { type: String, required: true },
     passedTitle: { type: String, required: true },
     passedName: { type: String, required: true },
-    passedFunc: { type: Function, required: true }
+    passedFunc: { type: Function, required: true },
+    checked: { type: Boolean, required: false },
+    item: { type: Object, required: true }
   },
   methods: {
     styled(e) {

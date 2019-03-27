@@ -2,14 +2,18 @@
   <StyledDiv
     :justifyContent="selectedLanguage ? 'space-around' : 'flex-start'"
     alignItems="flex-start"
-    height="100%"
   >
-    <StyledDiv height="10%">
+    <StyledDiv height="60px" padding="50px 0">
       <StyledHeader width="100%" height="5%">Recommender System</StyledHeader>
     </StyledDiv>
-    <StyledDiv flexDirection="row" justifyContent="space-around" height="12%">
+    <StyledDiv
+      flexDirection="row"
+      justifyContent="space-around"
+      height="100px"
+      marginTop="20px"
+    >
       <LanguageSelect
-        recommender="true"
+        :recommender="true"
         v-model="selectedLanguage"
         :languages="languages"
         @languageSelection="languageSelection"
@@ -36,19 +40,45 @@
       flexDirection="row"
       justifyContent="flex-start"
       alignItems="flex-start"
-      height="58%"
+      height="500px"
     >
-      <StyledDiv v-if="selectedLanguage !== false" width="20%" margin="0 5px">
-        <WordLengthSelection
-          :handleWordLength="handleWordLength"
-          :selectedWordLength="selectedWordLength"
-        />
-        <PhonemeSelection
-          :handlePhonemeSelection="handlePhonemeSelection"
-          :selectedPhoneme="selectedPhoneme"
-          :phonemeList="phonemeList"
-        />
+      <StyledDiv
+        v-if="selectedLanguage !== false"
+        width="20%"
+        margin="0 5px"
+        height="100%"
+        justifyContent="flex-start"
+        marginTop="10px"
+      >
+        <StyledSubHeader>Tool Kit</StyledSubHeader>
+        <StyledDiv
+          v-on:click="viewSelect = single.func"
+          v-for="(single, i) in toolkitButtons"
+          :key="i"
+          width="150px"
+          minHeight="30px"
+          margin="5px 0"
+          cursor="pointer"
+          backgroundColor="white"
+          hoverBrightness="brightness(90%)"
+          :border="
+            `2px solid ${
+              viewSelect === single.func
+                ? styled('lightRed')
+                : styled('brightYellow')
+            }`
+          "
+          borderRadius="10px"
+        >
+          <StyledText>{{ single.title }}</StyledText>
+        </StyledDiv>
       </StyledDiv>
+      <StyledDiv
+        height="75%"
+        :backgroundColor="styled('lightGray')"
+        width="2px"
+        margin="auto 0"
+      />
       <StyledDiv
         justifyContent="flex-start"
         alignItems="flex-start"
@@ -61,12 +91,29 @@
         />
       </StyledDiv>
     </StyledDiv>
-    <AlphabetSelection
-      v-if="selectedLanguage !== false"
-      :handleLetterSelection="handleLetterSelection"
-      :selectedLetters="selectedLetters"
-      :letters="letterListFromLanguage"
-    />
+    <StyledDiv
+      height="250px"
+      :backgroundColor="styled(`lightGray`)"
+      justifyContent="flex-start"
+    >
+      <WordLengthSelection
+        v-if="viewSelect === 1"
+        :handleWordLength="handleWordLength"
+        :selectedWordLength="selectedWordLength"
+      />
+      <AlphabetSelection
+        v-if="viewSelect === 2"
+        :handleLetterSelection="handleLetterSelection"
+        :selectedLetters="selectedLetters"
+        :letters="letterListFromLanguage"
+      />
+      <PhonemeSelection
+        v-if="viewSelect === 3"
+        :handlePhonemeSelection="handlePhonemeSelection"
+        :selectedPhoneme="selectedPhoneme"
+        :phonemeList="phonemeList"
+      />
+    </StyledDiv>
   </StyledDiv>
 </template>
 <script>
@@ -74,6 +121,7 @@ import axios from "axios";
 
 import PhonemeList from "../helpers/PhonemeList";
 import AlphabetList from "../helpers/AlphabetList";
+import StyleCompiler from "../helpers/StyleCompiler";
 
 import UserSelections from "../components/recommender/UserSelections";
 import LanguageSelect from "../components/uploads/LanguageSelect";
@@ -84,9 +132,10 @@ import AlphabetSelection from "../components/recommender/AlphabetSelection";
 
 import {
   StyledDiv,
+  StyledSubHeader,
+  StyledText,
   StyledButton,
-  StyledHeader,
-  ReadStyleGuide
+  StyledHeader
 } from "../components/styled/index.js";
 
 export default {
@@ -94,6 +143,8 @@ export default {
   components: {
     StyledDiv,
     StyledHeader,
+    StyledSubHeader,
+    StyledText,
     StyledButton,
     UserSelections,
     DisplayRecommendations,
@@ -104,14 +155,20 @@ export default {
   },
   data() {
     return {
-      selectedWordLength: null,
+      selectedWordLength: [],
       selectedLanguage: false,
+      viewSelect: 0,
       selectedPhoneme: [],
       selectedLetters: [],
       languages: [],
       phonemeList: [],
       letterListFromLanguage: [],
-      generatedRecommendations: []
+      generatedRecommendations: [],
+      toolkitButtons: [
+        { title: "Word Length", func: 1 },
+        { title: "Alphabet", func: 2 },
+        { title: "Sound", func: 3 }
+      ]
     };
   },
   mounted() {
@@ -159,7 +216,17 @@ export default {
       }
     },
     handleWordLength(e) {
-      this.selectedWordLength = parseInt(e);
+      if (
+        this.selectedWordLength.length > 0 &&
+        this.selectedWordLength.includes(e)
+      ) {
+        const update = this.selectedWordLength.filter(s => {
+          return s.id !== e.id;
+        });
+        this.selectedWordLength = update;
+      } else {
+        this.selectedWordLength.push(e);
+      }
     },
     languageSelection(e) {
       this.selectedLanguage = e;
@@ -180,12 +247,11 @@ export default {
         this.selectedLetters.push(e);
       }
     },
+    handleViewSelect(e) {
+      return (this.viewSelect = e);
+    },
     styled(e) {
-      if (e === "buttonColor") {
-        return ReadStyleGuide.color.white;
-      } else if (e === "buttonBG") {
-        return ReadStyleGuide.color.lightGreen;
-      }
+      return StyleCompiler(e);
     }
   },
   watch: {
