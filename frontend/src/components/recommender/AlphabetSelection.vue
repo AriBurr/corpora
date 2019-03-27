@@ -72,10 +72,7 @@ export default {
   methods: {
     determineLetter(e) {
       const first = e.split("")[0];
-      console.log(first);
       if (first === "&") {
-        console.log("found it");
-        console.log(e);
         return `\xc0`;
       } else {
         return e;

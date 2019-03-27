@@ -212,7 +212,7 @@ export default {
           })
           .then(r => {
             console.log(r);
-            this.phonemeRecommendations(r.data);
+            this.phonemeRecommendations = r.data;
           })
           .catch(r => console.log("error -> " + r));
       } else {
