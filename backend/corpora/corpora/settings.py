@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'apps.characters',
     'apps.languages',
     'apps.ngrams',
+    'apps.phonemes',
     'apps.uploads',
     'apps.recommenders',
     'apps.words'

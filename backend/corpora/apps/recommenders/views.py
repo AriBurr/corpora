@@ -10,3 +10,9 @@ class RecommenderView(APIView):
         substrings = RecommenderService.get_all_permutations(request.data)
         response = RecommenderService.search_substrings(substrings, request.data)
         return Response(response, status=status.HTTP_201_CREATED)
+
+class PhonemeRecommenderView(APIView):
+    def post(self, request):
+        response = RecommenderService.recommendations_by_phonemes(request.data)
+        return Response(response, status=status.HTTP_201_CREATED)
+
