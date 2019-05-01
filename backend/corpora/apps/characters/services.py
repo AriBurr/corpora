@@ -7,7 +7,7 @@ import re
 class CharacterService(object):
     @staticmethod
     def count_vectorizer(text, language_identifier):
-        alpha = re.sub(r"[^a-zA-Z]+", "", text)
+        alpha = re.sub(r"[^\d\s]", "", text)
         if alpha == "": return
         vectorizer = CountVectorizer(analyzer="char", lowercase=False)
         tokens = vectorizer.fit([alpha]).get_feature_names()

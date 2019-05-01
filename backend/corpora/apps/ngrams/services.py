@@ -7,9 +7,9 @@ import re
 class NGramService(object):
     @staticmethod
     def count_vectorizer(text, lang):
-        alpha = re.sub(r"[^a-zA-Z]+", " ", text)
+        alpha = re.sub(r"/[^\d\s]/g", " ", text)
         if alpha == " ": return
-        vectorizer = CountVectorizer(token_pattern=r"\b[a-zA-Z\']+\b", analyzer="word", ngram_range=(3,3), min_df=1, stop_words=None)
+        vectorizer = CountVectorizer(token_pattern=r"\b[^\d\s\']+\b", analyzer="word", ngram_range=(3,3), min_df=1, stop_words=None)
         tokens = vectorizer.fit([text]).get_feature_names() 
         freq = vectorizer.transform([text]).toarray()[0].tolist() 
         data = []

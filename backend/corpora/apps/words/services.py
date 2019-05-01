@@ -7,10 +7,9 @@ import re
 class WordService(object):
     @staticmethod
     def count_vectorizer(text, language_identifier):
-        alpha = re.sub(r"[^a-zA-Z]+", "", text)
+        alpha = re.sub(r"/[^\d\s]/g", "", text)
         if alpha == "": return
-        vectorizer = CountVectorizer(
-            token_pattern=r"\b[a-zA-Z\']+\b", analyzer="word")
+        vectorizer = CountVectorizer(token_pattern=r"\b[^\d\s\']+\b", analyzer="word")
         tokens = vectorizer.fit([text]).get_feature_names()
         length = [len(t) for t in tokens]
         freq = vectorizer.transform([text]).toarray()[0].tolist()
